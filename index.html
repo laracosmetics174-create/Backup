@@ -6,136 +6,291 @@
 <title>LARA Cosmetics Shop</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
-  body{background:linear-gradient(120deg,#0a0014,#120022,#1c0033);color:white;overflow-x:hidden;}
-  header{
-    position:sticky;top:0;z-index:999;
-    padding:18px 6%;
-    background:rgba(0,0,0,0.6);
-    backdrop-filter:blur(10px);
-    display:flex;justify-content:space-between;align-items:center;
-    border-bottom:1px solid rgba(255,255,255,0.1);
+  
+  body {
+    background: linear-gradient(135deg, #fff0f5, #ffe4f0, #f8e0f8); /* pink එක වැඩි කළා */
+    color: #222;  /* dark text – හොඳින් පේනවා */
+    overflow-x: hidden;
   }
-  .logo{
-    font-size:1.8rem;font-weight:800;
-    background:linear-gradient(90deg,#ff4fd8,#ffae00,#ff4fd8);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    padding: 18px 6%;
+    background: rgba(255, 240, 245, 0.88);  /* light pink transparent */
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 105, 180, 0.2);
   }
-  nav{display:flex;align-items:center;gap:20px;}
-  nav a{text-decoration:none;color:#ffd6f4;font-weight:500;transition:.3s;}
-  nav a:hover{color:#ff4fd8;}
-  .cart-btn{
-    background:#ff4fd8;border:none;
-    padding:10px 18px;border-radius:30px;
-    cursor:pointer;font-weight:700;color:black;
-    transition:.3s;
+
+  .logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff69b4, #ff8c00, #ff69b4); /* vibrant pink-orange */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
-  .cart-btn:hover{transform:scale(1.05);box-shadow:0 0 18px rgba(255,79,216,0.6);}
-  .hero{padding:70px 6%;text-align:center;}
-  .hero h1{
-    font-size:clamp(2.8rem,8vw,5rem);
-    font-weight:900;
-    background:linear-gradient(90deg,#fff,#ff4fd8,#ffae00,#fff);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
+
+  nav {display:flex;align-items:center;gap:20px;}
+  nav a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    transition: .3s;
   }
-  .hero p{margin-top:15px;font-size:1.2rem;opacity:.85;}
-  .search-box{
-    margin:40px auto 0;max-width:650px;
-    display:flex;gap:10px;justify-content:center;align-items:center;
+  nav a:hover {color: #ff69b4;}
+
+  .cart-btn {
+    background: linear-gradient(90deg, #ff69b4, #ff8c00);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    color: #000;
+    transition: .3s;
   }
-  .search-box input,.search-box select{
-    padding:12px 15px;border-radius:10px;border:none;outline:none;
-    font-size:1rem;width:100%;
+  .cart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
   }
-  .search-box select{width:220px;cursor:pointer;}
-  .products{padding:40px 6% 80px;}
-  .products h2{text-align:center;font-size:2.5rem;margin-bottom:30px;color:#ffae00;}
-  .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
-  .card{
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:18px;
-    padding:18px;
-    transition:.3s;
-    backdrop-filter:blur(12px);
+
+  .hero {padding: 70px 6%; text-align: center;}
+  .hero h1 {
+    font-size: clamp(2.8rem,8vw,5rem);
+    font-weight: 900;
+    background: linear-gradient(90deg, #ff1493, #ff69b4, #ff8c00, #ff1493);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
-  .card:hover{
-    transform:translateY(-10px);
-    border-color:rgba(255,79,216,0.6);
-    box-shadow:0 0 25px rgba(255,79,216,0.2);
+  .hero p {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #555;
   }
-  .card img{width:100%;height:220px;object-fit:cover;border-radius:15px;}
-  .card h3{margin-top:12px;font-size:1.2rem;color:#ffd6f4;}
-  .card p{margin-top:6px;font-size:1rem;opacity:.9;}
-  .price{margin-top:10px;font-size:1.2rem;font-weight:800;color:#ffae00;}
-  .btn{
-    margin-top:14px;width:100%;
-    padding:12px;border:none;border-radius:12px;
-    cursor:pointer;font-size:1rem;font-weight:700;
-    background:linear-gradient(90deg,#ff4fd8,#ffae00);
-    color:black;transition:.3s;
+
+  .search-box {
+    margin: 40px auto 0;
+    max-width: 650px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
   }
-  .btn:hover{transform:scale(1.03);box-shadow:0 0 18px rgba(255,174,0,0.4);}
-  /* CART */
-  .cart-sidebar{
-    position:fixed;top:0;right:-450px;width:400px;height:100%;
-    background:rgba(0,0,0,0.9);
-    backdrop-filter:blur(15px);
-    padding:20px;
-    transition:.4s;
-    z-index:9999;
-    border-left:1px solid rgba(255,255,255,0.1);
-    overflow-y:auto;
+  .search-box input,
+  .search-box select {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ffb6c1;
+    outline: none;
+    font-size: 1rem;
+    width: 100%;
+    background: white;
+    color: #222;
   }
-  .cart-sidebar.active{right:0;}
-  .cart-header{display:flex;justify-content:space-between;align-items:center;}
-  .cart-header h2{font-size:1.6rem;color:#ffae00;}
-  .close-btn{cursor:pointer;font-size:1.8rem;font-weight:800;color:#ff4fd8;}
-  .cart-items{margin-top:20px;}
-  .cart-item{
-    background:rgba(255,255,255,0.06);
-    padding:12px;border-radius:12px;margin-bottom:15px;
-    border:1px solid rgba(255,255,255,0.08);
+  .search-box select {width: 220px; cursor: pointer;}
+
+  .products {padding: 40px 6% 80px;}
+  .products h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #ff69b4; /* pink heading */
   }
-  .cart-item h4{font-size:1rem;color:#ffd6f4;}
-  .cart-item p{font-size:.95rem;opacity:.85;margin-top:5px;}
-  .cart-controls{margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:5px;}
-  .qty-btn{
-    background:#ff4fd8;border:none;padding:6px 10px;border-radius:8px;
-    cursor:pointer;font-weight:800;color:black;
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
   }
-  .remove-btn{
-    background:#ffae00;border:none;padding:6px 10px;border-radius:8px;
-    cursor:pointer;font-weight:800;color:black;
+
+  .card {
+    background: rgba(255, 245, 247, 0.85);
+    border: 1px solid #ffb6c1;
+    border-radius: 18px;
+    padding: 18px;
+    transition: .3s;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.1);
   }
-  .total-box{
-    margin-top:20px;padding:15px;border-radius:12px;
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.1);
+  .card:hover {
+    transform: translateY(-10px);
+    border-color: #ff69b4;
+    box-shadow: 0 8px 30px rgba(255, 105, 180, 0.2);
   }
-  .total-box h3{font-size:1.3rem;color:#ffae00;}
-  /* CHECKOUT */
-  .checkout{
-    margin-top:20px;padding:15px;border-radius:12px;
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.1);
+  .card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 15px;
   }
-  .checkout h3{color:#ff4fd8;margin-bottom:10px;}
-  .checkout input,.checkout textarea{
-    width:100%;padding:10px;margin-top:10px;border-radius:10px;border:none;outline:none;
+  .card h3 {
+    margin-top: 12px;
+    font-size: 1.2rem;
+    color: #333;
   }
-  .checkout textarea{height:80px;resize:none;}
-  .order-btn{
-    margin-top:15px;width:100%;
-    padding:12px;border:none;border-radius:12px;
-    cursor:pointer;font-size:1.05rem;font-weight:800;
-    background:linear-gradient(90deg,#ffae00,#ff4fd8);
-    color:black;
+  .card p {
+    margin-top: 6px;
+    font-size: 1rem;
+    color: #555;
   }
-  .order-btn:hover{box-shadow:0 0 20px rgba(255,79,216,0.4);transform:scale(1.02);}
-  footer{padding:25px;text-align:center;opacity:.6;font-size:.95rem;}
+  .price {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ff4500; /* vibrant orange-pink */
+  }
+  .btn {
+    margin-top: 14px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff69b4, #ff8c00);
+    color: #000;
+    transition: .3s;
+  }
+  .btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+  }
+
+  /* CART SIDEBAR - Pinkish light */
+  .cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 400px;
+    height: 100%;
+    background: rgba(255, 240, 245, 0.97);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    transition: .4s;
+    z-index: 9999;
+    border-left: 1px solid #ffb6c1;
+    overflow-y: auto;
+    color: #222;
+  }
+  .cart-sidebar.active {right: 0;}
+  .cart-header {display: flex; justify-content: space-between; align-items: center;}
+  .cart-header h2 {font-size: 1.6rem; color: #ff69b4;}
+  .close-btn {cursor: pointer; font-size: 1.8rem; font-weight: 800; color: #ff69b4;}
+  .cart-items {margin-top: 20px;}
+  .cart-item {
+    background: rgba(255,255,255,0.7);
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ffb6c1;
+  }
+  .cart-item h4 {font-size: 1rem; color: #333;}
+  .cart-item p {font-size: .95rem; color: #555; margin-top: 5px;}
+  .cart-controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+  }
+  .qty-btn, .remove-btn {
+    background: #ff69b4;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 800;
+    color: #000;
+  }
+  .remove-btn {background: #ff8c00;}
+
+  .total-box {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid #ffb6c1;
+  }
+  .total-box h3 {font-size: 1.3rem; color: #ff69b4;}
+
+  .checkout {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid #ffb6c1;
+  }
+  .checkout h3 {color: #ff69b4; margin-bottom: 10px;}
+  .checkout input, .checkout textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ffb6c1;
+    outline: none;
+    background: white;
+    color: #222;
+  }
+  .checkout textarea {height: 80px; resize: none;}
+
+  .order-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff8c00, #ff69b4);
+    color: #000;
+  }
+  .order-btn:hover {
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    transform: scale(1.02);
+  }
+
+  footer {
+    padding: 25px;
+    text-align: center;
+    opacity: .7;
+    font-size: .95rem;
+    color: #555;
+  }
+
+  /* Toast */
+  #toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    z-index: 10000;
+    opacity: 0;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    pointer-events: none;
+    min-width: 220px;
+    text-align: center;
+  }
+  #toast.show {opacity: 1; bottom: 60px;}
+  #toast.success {border-left: 5px solid #ff8c00; color: #ff8c00;}
+  #toast.error {border-left: 5px solid #ff69b4; color: #ff69b4;}
 </style>
 </head>
 <body>
+
 <header>
   <div class="logo">LARA Cosmetics</div>
   <nav>
@@ -144,6 +299,7 @@
     <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
   </nav>
 </header>
+
 <section class="hero">
   <h1>Beauty That Shines ✨</h1>
   <p>Cosmetics Collection | Lipsticks | Skincare | Perfumes | Makeup Kits</p>
@@ -158,10 +314,12 @@
     </select>
   </div>
 </section>
+
 <section class="products" id="products">
   <h2>Our Products 💄</h2>
   <div class="product-grid" id="productGrid"></div>
 </section>
+
 <section class="hero" id="about">
   <h1 style="font-size:2.5rem;">About Us</h1>
   <p style="max-width:850px;margin:15px auto;line-height:1.8;">
@@ -169,6 +327,7 @@
     Place your order now and it will be sent directly to our email.
   </p>
 </section>
+
 <footer>
   © LARA Cosmetics. All Rights Reserved.
 </footer>
@@ -193,48 +352,47 @@
   </div>
 </div>
 
-<!-- EMAILJS SCRIPT -->
+<!-- Toast container -->
+<div id="toast"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-/* =============================
-   EMAILJS CONFIG
-============================= */
 emailjs.init("W_o_RiuSlVn_zCxlp");
 
-/* ===========================
-   PRODUCTS ටික මෙතනම දාලා තියෙනවා (ඔයාට ඕන විදිහට change කරගන්න)
-=========================== */
 let products = [];
-
-fetch('https://script.google.com/macros/s/AKfycby0FNsa6h84fanuT5xgOD__MH8L69-ORZSXnJJjk1qmvYZ_SSnrRNgLQUjVQujfh8WN/exec')  // ඔයාගේ Apps Script URL එක මෙතන paste කරන්න
+fetch('https://script.google.com/macros/s/AKfycby0FNsa6h84fanuT5xgOD__MH8L69-ORZSXnJJjk1qmvYZ_SSnrRNgLQUjVQujfh8WN/exec')
   .then(response => response.json())
   .then(data => {
     products = data;
-    renderProducts();  // ඔයාගේ function එක call වෙනවා
-    console.log('Products loaded from Sheet!');
+    renderProducts();
   })
   .catch(error => {
-    console.error('Error:', error);
-    document.getElementById('productGrid').innerHTML = '<p style="text-align:center; color:#ffae00; font-size:1.2rem;">Products load කරන්න බැරි වුණා 😢 Refresh කරලා බලන්න</p>';
+    document.getElementById('productGrid').innerHTML = '<p style="text-align:center; color:#ff69b4; font-size:1.2rem;">Products load කරන්න බැරි වුණා 😢 Refresh කරලා බලන්න</p>';
   });
 
-/* ===========================
-   CART SYSTEM
-=========================== */
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function saveCart(){
+function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function toggleCart(){
+function showToast(message, type = 'success') {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = `show ${type}`;
+  setTimeout(() => {
+    toast.className = toast.className.replace('show', '');
+  }, 2200);
+}
+
+function toggleCart() {
   document.getElementById("cartSidebar").classList.toggle("active");
   renderCart();
 }
 
-function addToCart(productId){
+function addToCart(productId) {
   const item = cart.find(p => p.id === productId);
-  if(item){
+  if (item) {
     item.qty += 1;
   } else {
     cart.push({ id: productId, qty: 1 });
@@ -242,52 +400,48 @@ function addToCart(productId){
   saveCart();
   renderCart();
   updateCartCount();
+  showToast("Added to cart ✓");
 }
 
-function removeFromCart(productId){
+function removeFromCart(productId) {
   cart = cart.filter(p => p.id !== productId);
   saveCart();
   renderCart();
   updateCartCount();
 }
 
-function changeQty(productId, amount){
+function changeQty(productId, amount) {
   const item = cart.find(p => p.id === productId);
-  if(!item) return;
+  if (!item) return;
   item.qty += amount;
-  if(item.qty <= 0){
+  if (item.qty <= 0) {
     removeFromCart(productId);
+  } else {
+    saveCart();
+    renderCart();
+    updateCartCount();
   }
-  saveCart();
-  renderCart();
-  updateCartCount();
 }
 
-function updateCartCount(){
-  const totalQty = cart.reduce((sum,item)=>sum+item.qty,0);
+function updateCartCount() {
+  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
   document.getElementById("cartCount").innerText = totalQty;
 }
 
-/* ===========================
-   RENDER PRODUCTS
-=========================== */
-function renderProducts(){
+function renderProducts() {
   const grid = document.getElementById("productGrid");
   const search = document.getElementById("searchInput").value.toLowerCase();
   const category = document.getElementById("categoryFilter").value;
   grid.innerHTML = "";
-
   const filtered = products.filter(p => {
     const matchSearch = p.name.toLowerCase().includes(search);
     const matchCategory = category === "all" ? true : p.category === category;
     return matchSearch && matchCategory;
   });
-
-  if(filtered.length === 0){
-    grid.innerHTML = "<p style='text-align:center;opacity:0.7;font-size:1.2rem;'>No products found 😢</p>";
+  if (filtered.length === 0) {
+    grid.innerHTML = "<p style='text-align:center;opacity:0.7;font-size:1.2rem;color:#555;'>Loading products</p>";
     return;
   }
-
   filtered.forEach(p => {
     grid.innerHTML += `
       <div class="card">
@@ -301,23 +455,19 @@ function renderProducts(){
   });
 }
 
-/* ===========================
-   RENDER CART
-=========================== */
-function renderCart(){
+function renderCart() {
   const cartItemsBox = document.getElementById("cartItems");
   const cartTotalBox = document.getElementById("cartTotal");
   cartItemsBox.innerHTML = "";
-  if(cart.length === 0){
-    cartItemsBox.innerHTML = "<p style='opacity:0.7;text-align:center;margin-top:20px;'>Cart is empty 🛒</p>";
+  if (cart.length === 0) {
+    cartItemsBox.innerHTML = "<p style='opacity:0.7;text-align:center;margin-top:20px;color:#555;'>Cart is empty 🛒</p>";
     cartTotalBox.innerText = "0";
     return;
   }
-
   let total = 0;
   cart.forEach(item => {
     const product = products.find(p => p.id === item.id);
-    if(!product) return;
+    if (!product) return;
     const subTotal = product.price * item.qty;
     total += subTotal;
     cartItemsBox.innerHTML += `
@@ -335,11 +485,8 @@ function renderCart(){
   cartTotalBox.innerText = total;
 }
 
-/* ===========================
-   PLACE ORDER
-=========================== */
-function placeOrder(){
-  if(cart.length === 0){
+function placeOrder() {
+  if (cart.length === 0) {
     alert("Your cart is empty!");
     return;
   }
@@ -347,7 +494,7 @@ function placeOrder(){
   const phone = document.getElementById("customerPhone").value.trim();
   const email = document.getElementById("customerEmail").value.trim();
   const address = document.getElementById("customerAddress").value.trim();
-  if(!name || !phone || !address){
+  if (!name || !phone || !address) {
     alert("Please fill Name, Phone, and Address!");
     return;
   }
@@ -355,7 +502,7 @@ function placeOrder(){
   let total = 0;
   cart.forEach(item => {
     const product = products.find(p => p.id === item.id);
-    if(!product) return;
+    if (!product) return;
     const sub = product.price * item.qty;
     total += sub;
     orderText += `• ${product.name} (Rs.${product.price}) x ${item.qty} = Rs.${sub}\n`;
@@ -368,10 +515,14 @@ function placeOrder(){
     order_items: orderText,
     total_price: total
   };
-
+  const orderBtn = document.querySelector(".order-btn");
+  const originalText = orderBtn.innerHTML;
+  orderBtn.innerHTML = "⏳ Please wait...";
+  orderBtn.disabled = true;
   emailjs.send("service_jole3ot", "template_n8pbmd8", templateParams)
     .then(() => {
-      alert("✅ Order sent successfully to SHEWA Cosmetics!");
+      showToast("Order Confirmed! Thank you ♡", "success");
+      alert("✅ Order sent successfully!");
       cart = [];
       localStorage.removeItem("cart");
       renderCart();
@@ -382,12 +533,19 @@ function placeOrder(){
       document.getElementById("customerAddress").value = "";
     })
     .catch((error) => {
-      alert("❌ Order send failed! Check EmailJS setup.");
-      console.log("EmailJS Error:", error);
+      showToast("Order failed – try again", "error");
+      alert("❌ Order send failed! Check connection or EmailJS.");
+      console.error(error);
+    })
+    .finally(() => {
+      setTimeout(() => {
+        orderBtn.innerHTML = originalText;
+        orderBtn.disabled = false;
+      }, 1800);
     });
 }
 
-/* INIT */
+// Initial load
 renderProducts();
 renderCart();
 updateCartCount();
