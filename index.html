@@ -1,396 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>LARA Cosmetics Shop</title>
-<style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
-  
-  body {
-    background: linear-gradient(135deg, #fff0f5, #ffe4f0, #f8e0f8);
-    color: #222;
-    overflow-x: hidden;
-  }
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
 
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    padding: 18px 6%;
-    background: rgba(255, 240, 245, 0.88);
-    backdrop-filter: blur(12px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 105, 180, 0.2);
-  }
-
-  .logo {
-    font-size: 1.8rem;
-    font-weight: 800;
-    background: linear-gradient(90deg, #ff69b4, #ff8c00, #ff69b4);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  nav {display:flex;align-items:center;gap:20px;}
-  nav a {
-    text-decoration: none;
-    color: #444;
-    font-weight: 500;
-    transition: .3s;
-  }
-  nav a:hover {color: #ff69b4;}
-
-  .cart-btn {
-    background: linear-gradient(90deg, #ff69b4, #ff8c00);
-    border: none;
-    padding: 10px 18px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: 700;
-    color: #000;
-    transition: .3s;
-  }
-  .cart-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-  }
-
-  .hero {padding: 70px 6%; text-align: center;}
-  .hero h1 {
-    font-size: clamp(2.8rem,8vw,5rem);
-    font-weight: 900;
-    background: linear-gradient(90deg, #ff1493, #ff69b4, #ff8c00, #ff1493);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .hero p {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    color: #555;
-  }
-
-  .search-box {
-    margin: 40px auto 0;
-    max-width: 650px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-  }
-  .search-box input,
-  .search-box select {
-    padding: 12px 15px;
-    border-radius: 10px;
-    border: 1px solid #ffb6c1;
-    outline: none;
-    font-size: 1rem;
-    width: 100%;
-    background: white;
-    color: #222;
-  }
-  .search-box select {width: 220px; cursor: pointer;}
-
-  .products {padding: 40px 6% 80px;}
-  .products h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-    color: #ff69b4;
-  }
-
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-  }
-
-  .card {
-    background: rgba(255, 245, 247, 0.85);
-    border: 1px solid #ffb6c1;
-    border-radius: 18px;
-    padding: 18px;
-    transition: .3s;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.1);
-  }
-  .card:hover {
-    transform: translateY(-10px);
-    border-color: #ff69b4;
-    box-shadow: 0 8px 30px rgba(255, 105, 180, 0.2);
-  }
-  .card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 15px;
-  }
-  .card h3 {
-    margin-top: 12px;
-    font-size: 1.2rem;
-    color: #333;
-  }
-  .card p {
-    margin-top: 6px;
-    font-size: 1rem;
-    color: #555;
-  }
-  .price {
-    margin-top: 10px;
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #ff4500;
-  }
-  .btn {
-    margin-top: 14px;
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 700;
-    background: linear-gradient(90deg, #ff69b4, #ff8c00);
-    color: #000;
-    transition: .3s;
-  }
-  .btn:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-  }
-
-  .loading {
-    text-align: center;
-    padding: 60px 20px;
-    color: #ff69b4;
-    font-size: 1.3rem;
-  }
-
-  /* Cart sidebar and other styles remain same - omitted for brevity */
-  .cart-sidebar { /* ... your existing styles ... */ }
-  /* ... rest of your CSS ... */
-
-  #toast { /* ... your toast styles ... */ }
-</style>
-</head>
-<body>
-
-<header>
-  <div class="logo">LARA Cosmetics</div>
-  <nav>
-    <a href="#products">Shop</a>
-    <a href="#about">About</a>
-    <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
-  </nav>
-</header>
-
-<section class="hero">
-  <h1>Beauty That Shines ✨</h1>
-  <p>Cosmetics Collection | Lipsticks | Skincare | Perfumes | Makeup Kits</p>
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="renderProducts()">
-    <select id="categoryFilter" onchange="renderProducts()">
-      <option value="all">All Categories</option>
-      <option value="Skincare">Skincare</option>
-      <option value="Makeup">Makeup</option>
-      <option value="Perfume">Perfume</option>
-      <option value="Accessories">Accessories</option>
-    </select>
-  </div>
-</section>
-
-<section class="products" id="products">
-  <h2>Our Products 💄</h2>
-  <div class="product-grid" id="productGrid">
-    <div class="loading">Products ලෝඩ් වෙමින් පවතී... ♡</div>
-  </div>
-</section>
-
-<section class="hero" id="about">
-  <h1 style="font-size:2.5rem;">About Us</h1>
-  <p style="max-width:850px;margin:15px auto;line-height:1.8;">
-    Welcome to <b>LARA Cosmetics</b>. We provide quality beauty products at affordable prices.
-    Place your order now and it will be sent directly to our email.
-  </p>
-</section>
-
-<footer>
-  © LARA Cosmetics. All Rights Reserved.
-</footer>
-
-<!-- CART SIDEBAR (unchanged) -->
-<div class="cart-sidebar" id="cartSidebar">
-  <!-- ... your existing cart sidebar HTML ... -->
-</div>
-
-<div id="toast"></div>
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-emailjs.init("W_o_RiuSlVn_zCxlp");
-
-let products = [];
-const CACHE_KEY = "lara_products_cache";
-const CACHE_VERSION = "v1"; // change this when you update products structure
-
-function loadProducts() {
-  const grid = document.getElementById("productGrid");
-  
-  // Try cache first
-  const cachedData = localStorage.getItem(CACHE_KEY);
-  if (cachedData) {
-    try {
-      const parsed = JSON.parse(cachedData);
-      if (parsed.version === CACHE_VERSION) {
-        products = parsed.data;
-        renderProducts();
-        console.log("Products loaded from cache ✓");
-        return;
-      }
-    } catch(e) {
-      console.warn("Cache parse error, fetching fresh data");
-    }
-  }
-
-  // No valid cache → fetch
-  fetch('https://script.google.com/macros/s/AKfycby0FNsa6h84fanuT5xgOD__MH8L69-ORZSXnJJjk1qmvYZ_SSnrRNgLQUjVQujfh8WN/exec')
-    .then(response => {
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.json();
-    })
-    .then(data => {
-      products = data;
-      // Save to cache with version
-      localStorage.setItem(CACHE_KEY, JSON.stringify({
-        version: CACHE_VERSION,
-        timestamp: Date.now(),
-        data: products
-      }));
-      renderProducts();
-      console.log("Products fetched and cached ✓");
-    })
-    .catch(error => {
-      console.error("Fetch error:", error);
-      grid.innerHTML = `
-        <div class="loading" style="color:#ff4500;">
-          Products load කරන්න බැරි වුණා 😢<br>
-          <small>Refresh කරලා බලන්න හෝ internet connection එක බලන්න</small>
-        </div>`;
-    });
+body {
+  background: #ffffff;          /* ← changed to plain white */
+  color: #222;
+  overflow-x: hidden;
 }
 
-function renderProducts() {
-  const grid = document.getElementById("productGrid");
-  const search = document.getElementById("searchInput")?.value?.toLowerCase() || "";
-  const category = document.getElementById("categoryFilter")?.value || "all";
-
-  if (products.length === 0) {
-    grid.innerHTML = '<div class="loading">Products තවමත් ලෝඩ් වෙමින්...</div>';
-    return;
-  }
-
-  grid.innerHTML = "";
-
-  const filtered = products.filter(p => {
-    const matchSearch = p.name.toLowerCase().includes(search);
-    const matchCategory = category === "all" ? true : p.category === category;
-    return matchSearch && matchCategory;
-  });
-
-  if (filtered.length === 0) {
-    grid.innerHTML = '<p style="text-align:center;opacity:0.7;font-size:1.2rem;color:#555;">කිසිම product ගැලපෙන්නේ නෑ 😔</p>';
-    return;
-  }
-
-  filtered.forEach(p => {
-    grid.innerHTML += `
-      <div class="card">
-        <img src="${p.image}" alt="${p.name}" 
-             onerror="this.src='https://via.placeholder.com/250x220?text=No+Image';this.style.objectFit='contain';">
-        <h3>${p.name}</h3>
-        <p>Category: ${p.category}</p>
-        <div class="price">Rs. ${p.price}</div>
-        <button class="btn" onclick="addToCart(${p.id})">➕ Add to Cart</button>
-      </div>
-    `;
-  });
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  padding: 18px 6%;
+  background: #ffffff;           /* solid white instead of translucent pink */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);   /* subtle shadow instead of blur */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-// ------------------ Cache clear කරන්න ඕන නම් console එකේ මේක run කරන්න ------------------
-// localStorage.removeItem("lara_products_cache");
-// --------------------------------------------------------------------------------------------
-
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(cart));
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ff69b4, #ff8c00, #ff69b4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-function showToast(message, type = 'success') {
-  const toast = document.getElementById('toast');
-  toast.textContent = message;
-  toast.className = `show ${type}`;
-  setTimeout(() => toast.className = toast.className.replace('show', ''), 2200);
+nav {display:flex;align-items:center;gap:20px;}
+nav a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+  transition: .3s;
+}
+nav a:hover {color: #ff69b4;}
+
+.cart-btn {
+  background: linear-gradient(90deg, #ff69b4, #ff8c00);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #000;
+  transition: .3s;
+}
+.cart-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
 }
 
-function toggleCart() {
-  document.getElementById("cartSidebar").classList.toggle("active");
-  renderCart();
+/* Hero - kept gradient text, but section background is now white by default */
+.hero {
+  padding: 70px 6%;
+  text-align: center;
+  background: #ffffff;   /* explicit white (optional) */
 }
 
-function addToCart(productId) {
-  const item = cart.find(p => p.id === productId);
-  if (item) item.qty += 1;
-  else cart.push({ id: productId, qty: 1 });
-  
-  saveCart();
-  renderCart();
-  updateCartCount();
-  showToast("Added to cart ✓");
+.hero h1 {
+  font-size: clamp(2.8rem,8vw,5rem);
+  font-weight: 900;
+  background: linear-gradient(90deg, #ff1493, #ff69b4, #ff8c00, #ff1493);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-function removeFromCart(productId) {
-  cart = cart.filter(p => p.id !== productId);
-  saveCart();
-  renderCart();
-  updateCartCount();
+.hero p {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #555;
 }
 
-function changeQty(productId, amount) {
-  const item = cart.find(p => p.id === productId);
-  if (!item) return;
-  item.qty += amount;
-  if (item.qty <= 0) removeFromCart(productId);
-  else {
-    saveCart();
-    renderCart();
-    updateCartCount();
-  }
+.search-box {
+  margin: 40px auto 0;
+  max-width: 650px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.search-box input,
+.search-box select {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #ffb6c1;
+  outline: none;
+  font-size: 1rem;
+  width: 100%;
+  background: white;
+  color: #222;
+}
+.search-box select {width: 220px; cursor: pointer;}
+
+.products {
+  padding: 40px 6% 80px;
+  background: #ffffff;
+}
+.products h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #ff69b4;
 }
 
-function updateCartCount() {
-  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-  document.getElementById("cartCount").innerText = totalQty;
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
 }
 
-function renderCart() {
-  // ... your existing renderCart function (unchanged) ...
-  // paste your original renderCart code here
+.card {
+  background: #fffaf5;              /* very light warm white – softer than pure #fff */
+  border: 1px solid #ffe4e1;
+  border-radius: 18px;
+  padding: 18px;
+  transition: .3s;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.04);
 }
 
-function placeOrder() {
-  // ... your existing placeOrder function (unchanged) ...
-  // paste your original placeOrder code here
+.card:hover {
+  transform: translateY(-10px);
+  border-color: #ff69b4;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
 }
 
-// Initial load
-loadProducts();           // ← මේකයි වෙනස් කළේ (cache + fetch logic)
-renderCart();
-updateCartCount();
-</script>
-</body>
-</html>
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.card h3 {
+  margin-top: 12px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.card p {
+  margin-top: 6px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.price {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ff4500;
+}
+
+.btn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff69b4, #ff8c00);
+  color: #000;
+  transition: .3s;
+}
+.btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+}
+
+/* Rest of your styles (cart, toast, etc.) remain unchanged */
