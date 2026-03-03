@@ -14,7 +14,7 @@
 
   body {
     background: #ffffff;
-    color: #000000;               /* Main text color changed to black */
+    color: #B2BEB5;           /* Main text → ash grey */
     overflow-x: hidden;
   }
 
@@ -24,11 +24,11 @@
     z-index: 999;
     padding: 18px 6%;
     background: #ffffff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e5e2;  /* light ash border */
   }
 
   .logo {
@@ -43,13 +43,13 @@
   nav {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
   }
 
   nav a {
     text-decoration: none;
-    color: #000000;               /* Nav links black */
-    font-weight: 600;
+    color: #B2BEB5;          /* ash grey links */
+    font-weight: 500;
     transition: .3s;
   }
 
@@ -60,11 +60,11 @@
   .cart-btn {
     background: linear-gradient(90deg, #ff69b4, #ff8c00);
     border: none;
-    padding: 10px 20px;
+    padding: 10px 18px;
     border-radius: 30px;
     cursor: pointer;
     font-weight: 700;
-    color: #000;
+    color: #000;              /* black text on button */
     transition: .3s;
   }
 
@@ -73,167 +73,168 @@
     box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
   }
 
+  .cart-btn span {
+    color: #000;
+  }
+
   .hero {
-    padding: 80px 6%;
+    padding: 70px 6%;
     text-align: center;
     background: #ffffff;
   }
 
   .hero h1 {
-    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-size: clamp(2.8rem, 8vw, 5rem);
     font-weight: 900;
     background: linear-gradient(90deg, #ff1493, #ff69b4, #ff8c00, #ff1493);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    line-height: 1.1;
   }
 
   .hero p {
-    margin-top: 20px;
-    font-size: 1.3rem;
-    color: #111111;               /* Darker text */
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #B2BEB5;           /* ash grey */
   }
 
   .search-box {
-    margin: 45px auto 0;
-    max-width: 680px;
+    margin: 40px auto 0;
+    max-width: 650px;
     display: flex;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
     align-items: center;
   }
 
   .search-box input,
   .search-box select {
-    padding: 13px 16px;
-    border-radius: 12px;
-    border: 1px solid #ff69b4;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #d0d9d5;  /* light ash border */
     outline: none;
     font-size: 1rem;
     width: 100%;
-    background: #fff;
-    color: #000000;
+    background: white;
+    color: #B2BEB5;
+  }
+
+  .search-box input::placeholder {
+    color: #c0c9c5;
   }
 
   .search-box select {
-    width: 240px;
+    width: 220px;
     cursor: pointer;
+    color: #B2BEB5;
   }
 
   .products {
-    padding: 50px 6% 90px;
+    padding: 40px 6% 80px;
     background: #ffffff;
   }
 
   .products h2 {
     text-align: center;
-    font-size: 2.8rem;
-    margin-bottom: 40px;
-    color: #000000;               /* Changed to black from pink */
-    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #B2BEB5;           /* ash grey for heading */
   }
 
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
   }
 
   .card {
-    background: #ffffff;
-    border: 1px solid #eee;
-    border-radius: 20px;
-    padding: 20px;
+    background: #f8f9f8;               /* very light ash-white mix */
+    border: 1px solid #e0e5e2;         /* ash shade border */
+    border-radius: 18px;
+    padding: 18px;
     transition: .3s;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.03);
   }
 
   .card:hover {
-    transform: translateY(-12px);
+    transform: translateY(-10px);
     border-color: #ff69b4;
-    box-shadow: 0 12px 35px rgba(255, 105, 180, 0.18);
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.12);
   }
 
   .card img {
     width: 100%;
-    height: 240px;
+    height: 220px;
     object-fit: cover;
-    border-radius: 16px;
-    margin-bottom: 12px;
+    border-radius: 15px;
   }
 
   .card h3 {
-    margin-top: 8px;
-    font-size: 1.35rem;
-    color: #000000;               /* Product name black */
-    font-weight: 700;
+    margin-top: 12px;
+    font-size: 1.2rem;
+    color: #B2BEB5;           /* ash grey */
   }
 
   .card p {
     margin-top: 6px;
     font-size: 1rem;
-    color: #222222;               /* Category text dark */
+    color: #B2BEB5;
   }
 
   .price {
-    margin-top: 12px;
-    font-size: 1.4rem;
+    margin-top: 10px;
+    font-size: 1.2rem;
     font-weight: 800;
-    color: #ff4500;
+    color: #ff4500;           /* kept orange for emphasis */
   }
 
   .btn {
-    margin-top: 16px;
+    margin-top: 14px;
     width: 100%;
-    padding: 13px;
+    padding: 12px;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     background: linear-gradient(90deg, #ff69b4, #ff8c00);
-    color: #000;
+    color: #000;              /* black on gradient button */
     transition: .3s;
   }
 
   .btn:hover {
-    transform: scale(1.04);
-    box-shadow: 0 0 25px rgba(255, 105, 180, 0.45);
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
   }
 
   .loading {
     text-align: center;
-    padding: 80px 20px;
-    color: #000000;
-    font-size: 1.4rem;
-    font-weight: 500;
+    padding: 60px 20px;
+    color: #B2BEB5;
+    font-size: 1.3rem;
   }
 
   footer {
     text-align: center;
-    padding: 40px 6%;
-    color: #333333;
-    border-top: 1px solid #eee;
+    padding: 30px 6%;
+    color: #B2BEB5;
+    border-top: 1px solid #e0e5e2;
     background: #ffffff;
-    font-size: 0.95rem;
   }
 
-  /* Cart sidebar basic styles */
+  /* Cart sidebar */
   .cart-sidebar {
     position: fixed;
-    right: -400px;
+    right: -380px;
     top: 0;
-    width: 400px;
+    width: 380px;
     height: 100%;
     background: white;
-    box-shadow: -6px 0 30px rgba(0,0,0,0.15);
+    box-shadow: -5px 0 25px rgba(0,0,0,0.1);
     transition: right 0.4s ease;
     z-index: 1000;
     overflow-y: auto;
+    color: #B2BEB5;
   }
 
   .cart-sidebar.active {
@@ -242,12 +243,12 @@
 
   #toast {
     position: fixed;
-    bottom: 40px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    background: #111;
+    background: #333;
     color: white;
-    padding: 16px 32px;
+    padding: 14px 28px;
     border-radius: 50px;
     opacity: 0;
     transition: all 0.4s;
@@ -257,7 +258,7 @@
 
   #toast.show {
     opacity: 1;
-    bottom: 60px;
+    bottom: 50px;
   }
 
   #toast.success {
@@ -300,8 +301,8 @@
 </section>
 
 <section class="hero" id="about">
-  <h1 style="font-size:2.8rem; color:#000000;">About Us</h1>
-  <p style="max-width:900px; margin:20px auto; line-height:1.8; color:#111111; font-size:1.15rem;">
+  <h1 style="font-size:2.5rem;">About Us</h1>
+  <p style="max-width:850px; margin:15px auto; line-height:1.8;">
     Welcome to <b>LARA Cosmetics</b>. We provide quality beauty products at affordable prices.<br>
     Place your order now and it will be sent directly to our email.
   </p>
@@ -311,14 +312,13 @@
   © LARA Cosmetics. All Rights Reserved.
 </footer>
 
-<!-- CART SIDEBAR -->
 <div class="cart-sidebar" id="cartSidebar">
-  <div style="padding:25px;">
-    <h2 style="margin-bottom:25px; color:#000; font-size:1.8rem;">Your Cart</h2>
+  <div style="padding:20px;">
+    <h2 style="margin-bottom:20px; color:#B2BEB5;">Your Cart</h2>
     <div id="cartItems"></div>
-    <div id="cartTotal" style="margin:30px 0; font-size:1.4rem; font-weight:bold; text-align:right; color:#000;"></div>
-    <button onclick="placeOrder()" class="btn" style="margin-top:20px;">Place Order →</button>
-    <button onclick="toggleCart()" style="margin-top:15px; width:100%; padding:13px; background:#f5f5f5; color:#000; border:1px solid #ddd; border-radius:14px; font-weight:600; cursor:pointer;">Close Cart</button>
+    <div id="cartTotal" style="margin:25px 0; font-size:1.3rem; font-weight:bold; text-align:right; color:#B2BEB5;"></div>
+    <button onclick="placeOrder()" class="btn" style="margin-top:15px;">Place Order →</button>
+    <button onclick="toggleCart()" style="margin-top:12px; background:#eee; color:#B2BEB5; border:1px solid #d0d9d5;">Close</button>
   </div>
 </div>
 
@@ -334,6 +334,7 @@ const CACHE_VERSION = "v1";
 
 function loadProducts() {
   const grid = document.getElementById("productGrid");
+
   const cachedData = localStorage.getItem(CACHE_KEY);
   if (cachedData) {
     try {
@@ -341,49 +342,58 @@ function loadProducts() {
       if (parsed.version === CACHE_VERSION) {
         products = parsed.data;
         renderProducts();
+        console.log("Products loaded from cache ✓");
         return;
       }
     } catch(e) {}
   }
 
   fetch('https://script.google.com/macros/s/AKfycby0FNsa6h84fanuT5xgOD__MH8L69-ORZSXnJJjk1qmvYZ_SSnrRNgLQUjVQujfh8WN/exec')
-    .then(r => {
-      if (!r.ok) throw new Error();
-      return r.json();
+    .then(response => {
+      if (!response.ok) throw new Error("Network error");
+      return response.json();
     })
     .then(data => {
       products = data;
-      localStorage.setItem(CACHE_KEY, JSON.stringify({version: CACHE_VERSION, data}));
+      localStorage.setItem(CACHE_KEY, JSON.stringify({
+        version: CACHE_VERSION,
+        timestamp: Date.now(),
+        data: products
+      }));
       renderProducts();
     })
-    .catch(() => {
-      grid.innerHTML = `<div class="loading" style="color:#c00;">Products load කරන්න බැරි වුණා 😢<br><small>Refresh කරලා බලන්න</small></div>`;
+    .catch(error => {
+      grid.innerHTML = `
+        <div class="loading" style="color:#ff4500;">
+          Products load කරන්න බැරි වුණා 😢<br>
+          <small>Refresh කරලා බලන්න</small>
+        </div>`;
     });
 }
 
 function renderProducts() {
   const grid = document.getElementById("productGrid");
-  const search = (document.getElementById("searchInput")?.value || "").toLowerCase();
-  const cat = document.getElementById("categoryFilter")?.value || "all";
+  const search = document.getElementById("searchInput")?.value?.toLowerCase() || "";
+  const category = document.getElementById("categoryFilter")?.value || "all";
 
   if (products.length === 0) return;
 
   grid.innerHTML = "";
-  const filtered = products.filter(p => 
-    p.name.toLowerCase().includes(search) &&
-    (cat === "all" || p.category === cat)
-  );
+  const filtered = products.filter(p => {
+    return p.name.toLowerCase().includes(search) &&
+           (category === "all" || p.category === category);
+  });
 
   if (filtered.length === 0) {
-    grid.innerHTML = '<p style="text-align:center; color:#444; font-size:1.3rem; padding:60px 0;">කිසිම product ගැලපෙන්නේ නෑ 😔</p>';
+    grid.innerHTML = '<p style="text-align:center;opacity:0.7;font-size:1.2rem;color:#B2BEB5;">කිසිම product ගැලපෙන්නේ නෑ 😔</p>';
     return;
   }
 
   filtered.forEach(p => {
     grid.innerHTML += `
       <div class="card">
-        <img src="${p.image}" alt="${p.name}" 
-             onerror="this.src='https://via.placeholder.com/260x240?text=No+Image';this.style.objectFit='contain';">
+        <img src="${p.image}" alt="${p.name}"
+             onerror="this.src='https://via.placeholder.com/250x220?text=No+Image';this.style.objectFit='contain';">
         <h3>${p.name}</h3>
         <p>Category: ${p.category}</p>
         <div class="price">Rs. ${p.price}</div>
@@ -397,11 +407,11 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() { localStorage.setItem("cart", JSON.stringify(cart)); }
 
-function showToast(msg, type = 'success') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = `show ${type}`;
-  setTimeout(() => t.className = '', 2500);
+function showToast(message, type = 'success') {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = `show ${type}`;
+  setTimeout(() => toast.className = '', 2200);
 }
 
 function toggleCart() {
@@ -409,28 +419,28 @@ function toggleCart() {
   renderCart();
 }
 
-function addToCart(id) {
-  const item = cart.find(i => i.id === id);
-  if (item) item.qty++;
-  else cart.push({id, qty:1});
+function addToCart(productId) {
+  const item = cart.find(p => p.id === productId);
+  if (item) item.qty += 1;
+  else cart.push({ id: productId, qty: 1 });
   saveCart();
   renderCart();
   updateCartCount();
   showToast("Added to cart ✓");
 }
 
-function removeFromCart(id) {
-  cart = cart.filter(i => i.id !== id);
+function removeFromCart(productId) {
+  cart = cart.filter(p => p.id !== productId);
   saveCart();
   renderCart();
   updateCartCount();
 }
 
-function changeQty(id, delta) {
-  const item = cart.find(i => i.id === id);
+function changeQty(productId, amount) {
+  const item = cart.find(p => p.id === productId);
   if (!item) return;
-  item.qty += delta;
-  if (item.qty <= 0) removeFromCart(id);
+  item.qty += amount;
+  if (item.qty <= 0) removeFromCart(productId);
   else {
     saveCart();
     renderCart();
@@ -439,81 +449,78 @@ function changeQty(id, delta) {
 }
 
 function updateCartCount() {
-  const count = cart.reduce((s, i) => s + i.qty, 0);
-  document.getElementById("cartCount").innerText = count;
+  const total = cart.reduce((sum, item) => sum + item.qty, 0);
+  document.getElementById("cartCount").innerText = total;
 }
 
 function renderCart() {
-  const cont = document.getElementById("cartItems");
-  if (!cont) return;
-  cont.innerHTML = "";
+  const container = document.getElementById("cartItems");
+  if (!container) return;
+  container.innerHTML = "";
   let total = 0;
 
   if (cart.length === 0) {
-    cont.innerHTML = '<p style="text-align:center; color:#555; padding:60px 0; font-size:1.2rem;">Your cart is empty 🛍️</p>';
+    container.innerHTML = '<p style="text-align:center; color:#B2BEB5; padding:40px 0;">Your cart is empty 🛍️</p>';
     document.getElementById("cartTotal").innerHTML = "";
     return;
   }
 
   cart.forEach(item => {
-    const prod = products.find(p => p.id === item.id);
-    if (!prod) return;
-    const itemTot = prod.price * item.qty;
-    total += itemTot;
+    const product = products.find(p => p.id === item.id);
+    if (!product) return;
+    const itemTotal = product.price * item.qty;
+    total += itemTotal;
 
-    cont.innerHTML += `
-      <div style="display:flex; align-items:center; margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid #eee;">
-        <img src="${prod.image}" style="width:80px;height:80px;object-fit:cover;border-radius:10px;margin-right:18px;">
+    container.innerHTML += `
+      <div style="display:flex; align-items:center; margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid #e0e5e2;">
+        <img src="${product.image}" style="width:70px; height:70px; object-fit:cover; border-radius:8px; margin-right:15px;">
         <div style="flex:1;">
-          <div style="font-weight:700;color:#000;">${prod.name}</div>
-          <div style="color:#ff4500;margin:5px 0;">Rs. ${prod.price} × ${item.qty}</div>
+          <div style="font-weight:600; color:#B2BEB5;">${product.name}</div>
+          <div style="color:#ff4500; margin:4px 0;">Rs. ${product.price} × ${item.qty}</div>
         </div>
         <div style="text-align:right;">
-          <div style="font-weight:800;color:#ff4500;">Rs. ${itemTot}</div>
-          <div style="margin-top:8px;">
-            <button onclick="changeQty(${item.id},-1)" style="background:none;border:none;font-size:1.3rem;cursor:pointer;margin:0 8px;">−</button>
-            <button onclick="removeFromCart(${item.id})" style="background:none;border:none;color:#c00;cursor:pointer;font-size:0.95rem;">Remove</button>
-          </div>
+          <div style="font-weight:bold; color:#ff4500;">Rs. ${itemTotal}</div>
+          <button onclick="changeQty(${item.id}, -1)" style="margin:0 6px; background:none; border:none; font-size:1.1rem; cursor:pointer; color:#B2BEB5;">−</button>
+          <button onclick="removeFromCart(${item.id})" style="background:none; border:none; color:#ff4444; cursor:pointer;">Remove</button>
         </div>
       </div>
     `;
   });
 
-  document.getElementById("cartTotal").innerHTML = `Total: <span style="color:#ff4500;font-weight:800;">Rs. ${total}</span>`;
+  document.getElementById("cartTotal").innerHTML = `Total: <span style="color:#ff4500;">Rs. ${total}</span>`;
 }
 
 function placeOrder() {
   if (cart.length === 0) return showToast("Cart is empty!", "error");
 
-  let msg = "New Order from LARA Cosmetics!\n\n";
-  let tot = 0;
+  let message = "New Order from LARA Cosmetics!\n\n";
+  let total = 0;
 
-  cart.forEach(i => {
-    const p = products.find(pr => pr.id === i.id);
+  cart.forEach(item => {
+    const p = products.find(prod => prod.id === item.id);
     if (p) {
-      const it = p.price * i.qty;
-      tot += it;
-      msg += `${p.name} × ${i.qty} = Rs. ${it}\n`;
+      const itemTotal = p.price * item.qty;
+      total += itemTotal;
+      message += `${p.name} × ${item.qty} = Rs. ${itemTotal}\n`;
     }
   });
 
-  msg += `\nTotal: Rs. ${tot}\n\nPlease process this order.`;
+  message += `\nTotal: Rs. ${total}\n\nPlease process this order.`;
 
-  // Replace with your real EmailJS values
+  // ← Replace with your real EmailJS values
   emailjs.send("service_xxxxxxxx", "template_xxxxxxxx", {
-    message: msg,
-    from_name: "LARA Shop",
-    to_email: "your-email@gmail.com"
+    message: message,
+    from_name: "LARA Cosmetics Shop",
+    to_email: "your-email@example.com"
   }).then(() => {
-    showToast("Order placed successfully! ♡");
+    showToast("Order placed successfully! We'll contact you soon ♡");
     cart = [];
     saveCart();
     renderCart();
     updateCartCount();
     toggleCart();
-  }).catch(e => {
-    console.error(e);
-    showToast("Failed to send order 😔", "error");
+  }).catch(err => {
+    showToast("Failed to send order. Try again.", "error");
   });
 }
 
