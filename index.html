@@ -1,97 +1,246 @@
 <!DOCTYPE html>
 <html lang="si">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation - {{order_id}}</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
-        .container { max-width: 650px; margin: 20px auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .header { background: linear-gradient(135deg, #4CAF50, #2E7D32); color: white; padding: 25px; text-align: center; }
-        .header h1 { margin: 0; font-size: 28px; }
-        .content { padding: 30px; }
-        .customer-info { background: #f9f9f9; padding: 20px; border-radius: 6px; margin-bottom: 25px; }
-        .customer-info p { margin: 8px 0; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background: #f1f1f1; color: #333; }
-        .product-img { width: 80px; height: 80px; object-fit: cover; border-radius: 4px; }
-        .total-row { font-weight: bold; font-size: 18px; background: #f1f1f1; }
-        .footer { background: #f9f9f9; padding: 20px; text-align: center; font-size: 13px; color: #666; }
-        .footer a { color: #4CAF50; text-decoration: none; }
-        @media only screen and (max-width: 600px) {
-            .container { margin: 10px; }
-            .product-img { width: 60px; height: 60px; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lara Cosmetics - Beauty Products Shop</title>
+  
+  <!-- Google Fonts (Sinhala support + modern look) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Noto+Sans+Sinhala:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Poppins', 'Noto Sans Sinhala', sans-serif;
+      background: #fffaf5;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Header / Navbar */
+    header {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      padding: 1rem 5%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav-links a:hover { color: #ffebee; }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1625772299848-361b803ffa25?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80') center/cover no-repeat;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 5%;
+    }
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+    }
+    .hero-content p {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      background: #ff6f91;
+      color: white;
+      padding: 0.9rem 2.5rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn:hover { background: #ff4d7a; transform: translateY(-3px); }
+
+    /* Products Section */
+    .products {
+      padding: 8rem 5% 5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 3rem;
+      color: #e91e63;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s;
+    }
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+    .card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 1.8rem;
+      text-align: center;
+    }
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      color: #333;
+    }
+    .price {
+      font-size: 1.6rem;
+      color: #e91e63;
+      font-weight: 600;
+      margin: 0.5rem 0;
+    }
+    .card .btn {
+      margin-top: 1rem;
+      background: #ff80ab;
+    }
+    .card .btn:hover { background: #ff4081; }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 3rem 1rem;
+      font-size: 0.95rem;
+    }
+    footer a { color: #ff80ab; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.8rem; }
+      .nav-links a { margin-left: 1rem; font-size: 0.95rem; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>✅ Order Confirmed!</h1>
-            <p style="margin: 8px 0 0 0; opacity: 0.95;">Thank you for your purchase</p>
-        </div>
 
-        <!-- Content -->
-        <div class="content">
-            <!-- Customer Info -->
-            <div class="customer-info">
-                <h2 style="margin-top: 0; color: #2E7D32;">Customer Details</h2>
-                <p><strong>Name:</strong> {{customer_name}}</p>
-                <p><strong>Email:</strong> {{customer_email}}</p>
-                <p><strong>Phone:</strong> {{customer_phone}}</p>
-                <p><strong>Order ID:</strong> {{order_id}}</p>
-                <p><strong>Order Date:</strong> {{order_date}}</p>
-            </div>
+  <!-- Navbar -->
+  <header>
+    <nav>
+      <div class="logo">Lara Cosmetics</div>
+      <div class="nav-links">
+        <a href="#home">මුල් පිටුව</a>
+        <a href="#products">නිෂ්පාදන</a>
+        <a href="#contact">සම්බන්ධ වන්න</a>
+      </div>
+    </nav>
+  </header>
 
-            <!-- Products Table -->
-            <h2 style="color: #2E7D32; margin-bottom: 10px;">Ordered Items</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 90px;">Image</th>
-                        <th>Product Name</th>
-                        <th style="text-align: center;">Price</th>
-                        <th style="text-align: center;">Qty</th>
-                        <th style="text-align: right;">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dynamic rows will be inserted here by your script -->
-                    {{products_rows}}
-                    <!-- Example row (your code will replace this with real data) -->
-                    <!-- 
-                    <tr>
-                        <td><img src="{{product_image_url}}" class="product-img" alt="Product"></td>
-                        <td>{{product_name}}</td>
-                        <td style="text-align: center;">Rs. {{price}}</td>
-                        <td style="text-align: center;">{{quantity}}</td>
-                        <td style="text-align: right;">Rs. {{item_total}}</td>
-                    </tr>
-                    -->
-                </tbody>
-            </table>
-
-            <!-- Grand Total -->
-            <table>
-                <tr class="total-row">
-                    <td colspan="4" style="text-align: right; font-size: 18px;">Grand Total</td>
-                    <td style="text-align: right; font-size: 18px; color: #2E7D32;">Rs. {{grand_total}}</td>
-                </tr>
-            </table>
-
-            <p style="margin-top: 30px; font-size: 14px; color: #555;">
-                Thank you for shopping with us! Your order has been confirmed and will be processed shortly.<br>
-                If you have any questions, please reply to this email or contact us.
-            </p>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>© 2026 Your Shop Name • All Rights Reserved</p>
-            <p><a href="https://yourwebsite.com">Visit Our Site</a> • <a href="https://yourwebsite.com/contact">Contact Us</a></p>
-        </div>
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>ඔබේ රූපලාවන්‍යය ඔප් නංවන්න</h1>
+      <p>ලස්සනම cosmetics & skincare products එකතුව ලංකාවේ ඔබ වෙතට</p>
+      <a href="#products" class="btn">නිෂ්පාදන බලන්න</a>
     </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products" id="products">
+    <h2>අපේ ලස්සන නිෂ්පාදන</h2>
+    <div class="grid">
+
+      <!-- Product 1 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1625772299848-361b803ffa25?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lipstick">
+        <div class="card-body">
+          <h3>Matte Lipstick - Red Velvet</h3>
+          <div class="price">Rs. 2,499</div>
+          <button class="btn">කාට් එකට එකතු කරන්න</button>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1570194066981-617ac1bcrgr?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Foundation">
+        <div class="card-body">
+          <h3>Flawless Foundation - Shade 02</h3>
+          <div class="price">Rs. 4,200</div>
+          <button class="btn">කාට් එකට එකතු කරන්න</button>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1629380104331-0e33e85f3b25?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Serum">
+        <div class="card-body">
+          <h3>Vitamin C Glow Serum</h3>
+          <div class="price">Rs. 3,800</div>
+          <button class="btn">කාට් එකට එකතු කරන්න</button>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1608248597788-353d1a0c4035?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Moisturizer">
+        <div class="card-body">
+          <h3>Hyaluronic Acid Moisturizer</h3>
+          <div class="price">Rs. 2,999</div>
+          <button class="btn">කාට් එකට එකතු කරන්න</button>
+        </div>
+      </div>
+
+      <!-- තව products ඕනේ නම් මෙතනට copy paste කරන්න -->
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <p>&copy; 2026 Lara Cosmetics | Negombo, Sri Lanka</p>
+    <p>ඔබේ රූපලාවන්‍යය අපි රැකගන්නවා 💄✨</p>
+    <p>Contact: +94 XX XXX XXXX | lara@cosmetics.lk</p>
+  </footer>
+
+  <script>
+    // Simple alert for "Add to Cart" (ඔයාට cart system එකක් ඕනේ නම් කියන්න)
+    document.querySelectorAll('.card .btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        alert('මෙම නිෂ්පාදනය කාට් එකට එකතු කළා! 🛒');
+      });
+    });
+  </script>
+
 </body>
 </html>
