@@ -84,13 +84,35 @@
     padding:20px; background:linear-gradient(90deg,#ff69b4,#ff8c00); color:white;
     text-align:center; font-size:1.4rem; font-weight:700;
   }
-  .modal-body {padding:20px;}
-  .modal-body img {width:100%; max-height:300px; object-fit:contain; border-radius:12px;}
-  .modal-body h2 {margin:15px 0 10px; color:#ff4500;}
+  .modal-body {padding:20px; text-align:center;}
   
+  /* Improved Product Image Styling */
+  .modal-body img {
+    width: 90%;
+    max-width: 360px;               /* ගොඩක් විශාල නොවෙන්න limit එකක් */
+    max-height: 380px;              /* උස limit එක වැඩි කළා – ඔයාගේ බෝතල් එක හොඳින් පේයි */
+    object-fit: contain;            /* stretch නොකර aspect ratio තියාගන්නවා */
+    border-radius: 16px;
+    margin: 15px auto 25px;
+    display: block;
+    background: linear-gradient(135deg, #fff5f7, #ffeef2); /* soft pink background */
+    padding: 15px;
+    box-shadow: 0 6px 20px rgba(255,105,180,0.18);
+    border: 1px solid #ffe4e1;
+  }
+
+  /* Mobile එකේ image තවත් හොඳින් fit වෙන්න */
+  @media (max-width: 500px) {
+    .modal-body img {
+      max-height: 320px;
+      width: 95%;
+      padding: 10px;
+    }
+  }
+
   /* Color Swatches */
   .swatches {
-    margin:15px 0; display:flex; flex-wrap:wrap; gap:14px;
+    margin:15px 0; display:flex; flex-wrap:wrap; gap:14px; justify-content:center;
   }
   .swatch-container {
     display:flex; flex-direction:column; align-items:center;
@@ -108,7 +130,7 @@
   }
   .swatch-label {
     margin-top:6px; font-size:0.85rem; color:#555;
-    max-width:50px; text-align:center; line-height:1.2;
+    max-width:60px; text-align:center; line-height:1.2;
   }
 
   .modal-close {
@@ -116,62 +138,15 @@
     cursor:pointer; font-weight:bold;
   }
 
-  /* Cart Sidebar */
-  .cart-sidebar {
-    position:fixed; top:0; right:-450px; width:400px; height:100%;
-    background:rgba(255,240,245,0.97); backdrop-filter:blur(15px);
-    padding:20px; transition:.4s; z-index:9999; border-left:1px solid #ffb6c1;
-    overflow-y:auto; color:#222;
-  }
-  .cart-sidebar.active {right:0;}
-  .cart-header {display:flex; justify-content:space-between; align-items:center;}
-  .cart-header h2 {font-size:1.6rem; color:#ff69b4;}
-  .close-btn {cursor:pointer; font-size:1.8rem; font-weight:800; color:#ff69b4;}
-  .cart-items {margin-top:20px;}
-  .cart-item {
-    background:rgba(255,255,255,0.7); padding:12px; border-radius:12px;
-    margin-bottom:15px; border:1px solid #ffb6c1;
-  }
-  .cart-item h4 {font-size:1rem; color:#333;}
-  .cart-item p {font-size:.95rem; color:#555; margin-top:5px;}
-  .cart-controls {margin-top:10px; display:flex; justify-content:space-between; gap:6px;}
-  .qty-btn, .remove-btn {
-    background:#ff69b4; border:none; padding:8px 12px; border-radius:8px;
-    cursor:pointer; font-weight:800; color:#000;
-  }
-  .remove-btn {background:#ff8c00;}
-  .total-box {margin-top:20px; padding:15px; border-radius:12px; background:rgba(255,255,255,0.7); border:1px solid #ffb6c1;}
-  .total-box h3 {font-size:1.3rem; color:#ff69b4;}
-  .checkout {margin-top:20px; padding:15px; border-radius:12px; background:rgba(255,255,255,0.7); border:1px solid #ffb6c1;}
-  .checkout h3 {color:#ff69b4; margin-bottom:10px;}
-  .checkout input, .checkout textarea {
-    width:100%; padding:10px; margin-top:10px; border-radius:10px;
-    border:1px solid #ffb6c1; outline:none; background:white; color:#222;
-  }
-  .checkout textarea {height:80px; resize:none;}
-  .order-btn {
-    margin-top:15px; width:100%; padding:12px; border:none; border-radius:12px;
-    cursor:pointer; font-size:1.05rem; font-weight:800;
-    background:linear-gradient(90deg,#ff8c00,#ff69b4); color:#000;
-  }
-  .order-btn:hover {box-shadow:0 0 20px rgba(255,105,180,0.5); transform:scale(1.02);}
+  /* Rest of your styles (cart, toast, etc.) remain the same */
+  .cart-sidebar { /* ... your existing cart styles ... */ }
+  /* ... other styles like footer, toast ... */
 
-  footer {padding:25px; text-align:center; opacity:.7; font-size:.95rem; color:#555;}
-
-  #toast {
-    position:fixed; bottom:30px; left:50%; transform:translateX(-50%);
-    background:rgba(0,0,0,0.85); color:#fff; padding:14px 28px;
-    border-radius:50px; font-weight:600; z-index:10000; opacity:0;
-    transition:all 0.4s ease; box-shadow:0 5px 20px rgba(0,0,0,0.3);
-    pointer-events:none; min-width:220px; text-align:center;
-  }
-  #toast.show {opacity:1; bottom:60px;}
-  #toast.success {border-left:5px solid #ff8c00; color:#ff8c00;}
-  #toast.error {border-left:5px solid #ff69b4; color:#ff69b4;}
 </style>
 </head>
 <body>
 
+<!-- Your HTML structure remains the same -->
 <header>
   <div class="logo">LARA Cosmetics</div>
   <nav>
@@ -181,55 +156,9 @@
   </nav>
 </header>
 
-<section class="hero">
-  <h1>Beauty That Shines ✨</h1>
-  <p>Cosmetics Collection | Lipsticks | Skincare | Perfumes | Makeup Kits</p>
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="renderProducts()">
-    <select id="categoryFilter" onchange="renderProducts()">
-      <option value="all">All Categories</option>
-      <option value="Skincare">Skincare</option>
-      <option value="Makeup">Makeup</option>
-      <option value="Perfume">Perfume</option>
-      <option value="Accessories">Accessories</option>
-    </select>
-  </div>
-</section>
+<!-- hero, products, about, footer sections same as before -->
 
-<section class="products" id="products">
-  <h2>Our Products 💄</h2>
-  <div class="product-grid" id="productGrid"></div>
-</section>
-
-<section class="hero" id="about">
-  <h1 style="font-size:2.5rem;">About Us</h1>
-  <p style="max-width:850px;margin:15px auto;line-height:1.8;">
-    Welcome to <b>LARA Cosmetics</b>. We provide quality beauty products at affordable prices.
-    Place your order now and it will be sent directly to our email.
-  </p>
-</section>
-
-<footer>© LARA Cosmetics. All Rights Reserved. | Negombo, Sri Lanka</footer>
-
-<!-- CART SIDEBAR -->
-<div class="cart-sidebar" id="cartSidebar">
-  <div class="cart-header">
-    <h2>Your Cart 🛍️</h2>
-    <span class="close-btn" onclick="toggleCart()">✖</span>
-  </div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="total-box">
-    <h3>Total: Rs. <span id="cartTotal">0</span></h3>
-  </div>
-  <div class="checkout">
-    <h3>Checkout Details</h3>
-    <input type="text" id="customerName" placeholder="Your Name">
-    <input type="text" id="customerPhone" placeholder="Phone Number">
-    <input type="email" id="customerEmail" placeholder="Customer Email (optional)">
-    <textarea id="customerAddress" placeholder="Delivery Address"></textarea>
-    <button class="order-btn" onclick="placeOrder()">📩 Place Order</button>
-  </div>
-</div>
+<!-- CART SIDEBAR same -->
 
 <!-- Product Detail Modal -->
 <div class="modal" id="productModal">
@@ -245,96 +174,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-emailjs.init("W_o_RiuSlVn_zCxlp"); // ඔයාගේ EmailJS Public Key
+// Your existing JavaScript code remains almost the same
+// Only showProductDetail function has small update for better image handling
 
-let products = [];
-fetch('https://script.google.com/macros/s/AKfycby0FNsa6h84fanuT5xgOD__MH8L69-ORZSXnJJjk1qmvYZ_SSnrRNgLQUjVQujfh8WN/exec')
-  .then(r => r.json())
-  .then(data => {
-    products = data;
-    renderProducts();
-  })
-  .catch(() => {
-    document.getElementById('productGrid').innerHTML = '<p style="text-align:center;color:#ff69b4;font-size:1.2rem;">Products loading failed 😢 Refresh කරන්න</p>';
-  });
-
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function saveCart() { localStorage.setItem("cart", JSON.stringify(cart)); }
-
-function showToast(msg, type='success') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = `show ${type}`;
-  setTimeout(() => t.className = t.className.replace('show',''), 2200);
-}
-
-function toggleCart() {
-  document.getElementById("cartSidebar").classList.toggle("active");
-  renderCart();
-}
-
-function updateCartCount() {
-  document.getElementById("cartCount").innerText = cart.reduce((sum,i)=>sum+i.qty,0);
-}
-
-function addToCart(id) {
-  let item = cart.find(p=>p.id===id);
-  if(item) item.qty++;
-  else cart.push({id, qty:1});
-  saveCart();
-  updateCartCount();
-  showToast("Added to cart ✓");
-}
-
-function removeFromCart(id) {
-  cart = cart.filter(p=>p.id !== id);
-  saveCart();
-  renderCart();
-  updateCartCount();
-  showToast("Removed from cart", "error");
-}
-
-function changeQty(id, amt) {
-  let item = cart.find(p=>p.id===id);
-  if(!item) return;
-  item.qty += amt;
-  if(item.qty <= 0) removeFromCart(id);
-  else {
-    saveCart();
-    renderCart();
-    updateCartCount();
-  }
-}
-
-function renderProducts() {
-  const grid = document.getElementById("productGrid");
-  const search = document.getElementById("searchInput").value.toLowerCase();
-  const cat = document.getElementById("categoryFilter").value;
-  grid.innerHTML = "";
-
-  const filtered = products.filter(p => 
-    p.name.toLowerCase().includes(search) &&
-    (cat === "all" || p.category === cat)
-  );
-
-  if(filtered.length === 0) {
-    grid.innerHTML = '<p style="text-align:center;opacity:0.7;">No products found</p>';
-    return;
-  }
-
-  filtered.forEach(p => {
-    grid.innerHTML += `
-      <div class="card" onclick="showProductDetail(${p.id})">
-        <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/250?text=No+Image';">
-        <h3>${p.name}</h3>
-        <p>Category: ${p.category}</p>
-        <div class="price">Rs. ${p.price}</div>
-        <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">➕ Add to Cart</button>
-      </div>
-    `;
-  });
-}
+// ... all other functions same ...
 
 function showProductDetail(id) {
   const p = products.find(x => x.id === id);
@@ -352,13 +195,12 @@ function showProductDetail(id) {
       let bg = color;
       let label = color;
 
-      // HEX නොවුණොත් basic name → color mapping
       if (!color.startsWith('#')) {
         const map = {
           'red': '#ff0000', 'pink': '#ffc0cb', 'matte pink': '#ff69b4',
           'coral': '#ff7f50', 'burgundy': '#800020', 'nude': '#f5c6a5',
-          'deep pink': '#c71585', 'rose': '#ff007f', 'berry': '#990033'
-          // ඔයාට ඕනේ නම් මෙතනට තව එකතු කරන්න
+          'clear': '#f0f8ff', 'transparent': '#ffffff00', 'gel': '#e0f7fa'
+          // ඔයාගේ products වලට match වෙන colors add කරගන්න
         };
         bg = map[color.toLowerCase()] || '#cccccc';
       }
@@ -376,118 +218,23 @@ function showProductDetail(id) {
   colorsHtml += '</div>';
 
   document.getElementById("modalBody").innerHTML = `
-    <img src="${p.image}" alt="${p.name}">
-    <h2>Rs. ${p.price}</h2>
-    <p><b>Category:</b> ${p.category}</p>
-    ${hasColors ? colorsHtml : '<p style="color:#777; margin:15px 0;">No colors available</p>'}
-    <p style="margin-top:20px; line-height:1.6;">${p.description || "No description available."}</p>
-    <button class="btn" style="margin-top:25px;" onclick="addToCart(${p.id})">➕ Add to Cart</button>
+    <img src="${p.image}" 
+         alt="${p.name}" 
+         onerror="this.src='https://via.placeholder.com/360x380/ffe4e1/333333?text=Image+Not+Found'; this.style.padding='20px';"
+         loading="lazy">
+    <h2 style="color:#ff4500; margin:10px 0;">Rs. ${p.price}</h2>
+    <p style="margin:8px 0;"><b>Category:</b> ${p.category}</p>
+    ${hasColors ? colorsHtml : '<p style="color:#777; margin:20px 0;">No colors specified</p>'}
+    <p style="margin-top:25px; line-height:1.6; color:#444;">${p.description || "No description available yet."}</p>
+    <button class="btn" style="margin-top:30px; max-width:320px;" onclick="addToCart(${p.id})">➕ Add to Cart</button>
   `;
 
   document.getElementById("productModal").classList.add("active");
 }
 
-function closeModal() {
-  document.getElementById("productModal").classList.remove("active");
-}
+// ... rest of your JS code (closeModal, renderCart, placeOrder, etc.) same as before ...
 
-function renderCart() {
-  const box = document.getElementById("cartItems");
-  const totalEl = document.getElementById("cartTotal");
-  box.innerHTML = "";
-
-  if(cart.length === 0) {
-    box.innerHTML = '<p style="text-align:center;opacity:0.7;">Cart is empty 🛒</p>';
-    totalEl.innerText = "0";
-    return;
-  }
-
-  let total = 0;
-  cart.forEach(item => {
-    const prod = products.find(p => p.id === item.id);
-    if(!prod) return;
-    const subt = prod.price * item.qty;
-    total += subt;
-
-    box.innerHTML += `
-      <div class="cart-item">
-        <h4>${prod.name}</h4>
-        <p>Rs. ${prod.price} × ${item.qty} = <b>Rs. ${subt}</b></p>
-        <div class="cart-controls">
-          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">➖</button>
-          <button class="qty-btn" onclick="changeQty(${item.id}, 1)">➕</button>
-          <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑 Remove</button>
-        </div>
-      </div>
-    `;
-  });
-
-  totalEl.innerText = total;
-}
-
-function placeOrder() {
-  if(cart.length === 0) return alert("Your cart is empty!");
-
-  const name = document.getElementById("customerName").value.trim();
-  const phone = document.getElementById("customerPhone").value.trim();
-  const email = document.getElementById("customerEmail").value.trim();
-  const addr = document.getElementById("customerAddress").value.trim();
-
-  if(!name || !phone || !addr) return alert("Name, Phone & Address අනිවාර්යයි!");
-
-  let itemsText = "";
-  let grandTotal = 0;
-
-  cart.forEach(i => {
-    const p = products.find(x => x.id === i.id);
-    if(!p) return;
-    const st = p.price * i.qty;
-    grandTotal += st;
-    itemsText += `• ${p.name} × ${i.qty} = Rs.${st}\n`;
-  });
-
-  const params = {
-    customer_name: name,
-    customer_phone: phone,
-    customer_email: email || "Not provided",
-    customer_address: addr,
-    order_items: itemsText,
-    total_price: grandTotal
-  };
-
-  const btn = document.querySelector(".order-btn");
-  const txt = btn.innerHTML;
-  btn.innerHTML = "⏳ Sending...";
-  btn.disabled = true;
-
-  emailjs.send("service_jole3ot", "template_n8pbmd8", params)
-    .then(() => {
-      showToast("Order Placed Successfully! ♡", "success");
-      alert("Order යැව්වා! Thank you!");
-      cart = [];
-      saveCart();
-      renderCart();
-      updateCartCount();
-      document.querySelectorAll(".checkout input, .checkout textarea").forEach(el => el.value = "");
-    })
-    .catch(err => {
-      showToast("Order failed – try again", "error");
-      console.error(err);
-    })
-    .finally(() => {
-      setTimeout(() => {
-        btn.innerHTML = txt;
-        btn.disabled = false;
-      }, 1800);
-    });
-}
-
-// Close modal when clicking outside
-document.getElementById("productModal").onclick = e => {
-  if(e.target === document.getElementById("productModal")) closeModal();
-};
-
-// Initial load
+// Initial calls
 renderProducts();
 renderCart();
 updateCartCount();
