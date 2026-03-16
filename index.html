@@ -77,7 +77,7 @@
   }
   .modal.active {display:flex;}
   .modal-content {
-    background:white; max-width:500px; width:100%; border-radius:20px;
+    background:white; max-width:520px; width:100%; border-radius:20px;
     overflow:hidden; position:relative; box-shadow:0 10px 40px rgba(0,0,0,0.3);
   }
   .modal-header {
@@ -86,14 +86,33 @@
   }
   .modal-body {padding:20px;}
   .modal-body img {width:100%; max-height:300px; object-fit:contain; border-radius:12px;}
-  .modal-body h2 {margin:15px 0 10px; color:#ff69b4;}
-  .modal-body .colors {margin:12px 0; color:#555;}
-  .modal-body .colors span {
-    display:inline-block; background:#ffe4e1; padding:6px 12px;
-    border-radius:20px; margin:4px; font-size:0.95rem;
+  .modal-body h2 {margin:15px 0 10px; color:#ff4500;}
+  
+  /* Color Swatches */
+  .swatches {
+    margin:15px 0; display:flex; flex-wrap:wrap; gap:14px;
   }
+  .swatch-container {
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .swatch {
+    width:44px; height:44px; border-radius:50%;
+    border:2px solid #fff; box-shadow:0 2px 10px rgba(0,0,0,0.15);
+    cursor:pointer; transition:all 0.25s;
+  }
+  .swatch:hover {
+    transform:scale(1.18); box-shadow:0 4px 14px rgba(255,105,180,0.4);
+  }
+  .swatch.selected {
+    border:4px solid #ff69b4; box-shadow:0 0 0 5px rgba(255,105,180,0.25);
+  }
+  .swatch-label {
+    margin-top:6px; font-size:0.85rem; color:#555;
+    max-width:50px; text-align:center; line-height:1.2;
+  }
+
   .modal-close {
-    position:absolute; top:12px; right:18px; font-size:2rem; color:white;
+    position:absolute; top:12px; right:18px; font-size:2.2rem; color:white;
     cursor:pointer; font-weight:bold;
   }
 
@@ -115,9 +134,9 @@
   }
   .cart-item h4 {font-size:1rem; color:#333;}
   .cart-item p {font-size:.95rem; color:#555; margin-top:5px;}
-  .cart-controls {margin-top:10px; display:flex; justify-content:space-between; gap:5px;}
+  .cart-controls {margin-top:10px; display:flex; justify-content:space-between; gap:6px;}
   .qty-btn, .remove-btn {
-    background:#ff69b4; border:none; padding:6px 10px; border-radius:8px;
+    background:#ff69b4; border:none; padding:8px 12px; border-radius:8px;
     cursor:pointer; font-weight:800; color:#000;
   }
   .remove-btn {background:#ff8c00;}
@@ -190,7 +209,7 @@
   </p>
 </section>
 
-<footer>© LARA Cosmetics. All Rights Reserved.</footer>
+<footer>© LARA Cosmetics. All Rights Reserved. | Negombo, Sri Lanka</footer>
 
 <!-- CART SIDEBAR -->
 <div class="cart-sidebar" id="cartSidebar">
@@ -226,7 +245,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-emailjs.init("W_o_RiuSlVn_zCxlp");
+emailjs.init("W_o_RiuSlVn_zCxlp"); // ඔයාගේ EmailJS Public Key
 
 let products = [];
 fetch('https://script.google.com/macros/s/AKfycby0FNsa6h84fanuT5xgOD__MH8L69-ORZSXnJJjk1qmvYZ_SSnrRNgLQUjVQujfh8WN/exec')
@@ -236,7 +255,7 @@ fetch('https://script.google.com/macros/s/AKfycby0FNsa6h84fanuT5xgOD__MH8L69-ORZ
     renderProducts();
   })
   .catch(() => {
-    document.getElementById('productGrid').innerHTML = '<p style="text-align:center;color:#ff69b4;font-size:1.2rem;">Products load කරන්න බැරි වුණා 😢</p>';
+    document.getElementById('productGrid').innerHTML = '<p style="text-align:center;color:#ff69b4;font-size:1.2rem;">Products loading failed 😢 Refresh කරන්න</p>';
   });
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -256,8 +275,7 @@ function toggleCart() {
 }
 
 function updateCartCount() {
-  const count = cart.reduce((sum,i)=>sum+i.qty,0);
-  document.getElementById("cartCount").innerText = count;
+  document.getElementById("cartCount").innerText = cart.reduce((sum,i)=>sum+i.qty,0);
 }
 
 function addToCart(id) {
@@ -274,7 +292,7 @@ function removeFromCart(id) {
   saveCart();
   renderCart();
   updateCartCount();
-  showToast("Item removed from cart", "error");
+  showToast("Removed from cart", "error");
 }
 
 function changeQty(id, amt) {
@@ -293,20 +311,19 @@ function renderProducts() {
   const grid = document.getElementById("productGrid");
   const search = document.getElementById("searchInput").value.toLowerCase();
   const cat = document.getElementById("categoryFilter").value;
-
   grid.innerHTML = "";
 
-  const filtered = products.filter(p=>{
-    return p.name.toLowerCase().includes(search) &&
-           (cat==="all" || p.category===cat);
-  });
+  const filtered = products.filter(p => 
+    p.name.toLowerCase().includes(search) &&
+    (cat === "all" || p.category === cat)
+  );
 
-  if(filtered.length===0){
+  if(filtered.length === 0) {
     grid.innerHTML = '<p style="text-align:center;opacity:0.7;">No products found</p>';
     return;
   }
 
-  filtered.forEach(p=>{
+  filtered.forEach(p => {
     grid.innerHTML += `
       <div class="card" onclick="showProductDetail(${p.id})">
         <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/250?text=No+Image';">
@@ -320,24 +337,51 @@ function renderProducts() {
 }
 
 function showProductDetail(id) {
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
+  const p = products.find(x => x.id === id);
+  if (!p) return alert("Product not found");
 
   document.getElementById("modalTitle").textContent = p.name;
 
-  let colorsHtml = "";
-  if(p.colors && p.colors.trim()){
-    const colorList = p.colors.split(",").map(c=>c.trim()).filter(c=>c);
-    colorsHtml = `<div class="colors">Available Colors: ${colorList.map(c=>`<span>${c}</span>`).join("")}</div>`;
+  let colorsHtml = '<div class="swatches">';
+  let hasColors = false;
+
+  if (p.colors && p.colors.trim()) {
+    const colorList = p.colors.split(",").map(c => c.trim()).filter(Boolean);
+    
+    colorList.forEach(color => {
+      let bg = color;
+      let label = color;
+
+      // HEX නොවුණොත් basic name → color mapping
+      if (!color.startsWith('#')) {
+        const map = {
+          'red': '#ff0000', 'pink': '#ffc0cb', 'matte pink': '#ff69b4',
+          'coral': '#ff7f50', 'burgundy': '#800020', 'nude': '#f5c6a5',
+          'deep pink': '#c71585', 'rose': '#ff007f', 'berry': '#990033'
+          // ඔයාට ඕනේ නම් මෙතනට තව එකතු කරන්න
+        };
+        bg = map[color.toLowerCase()] || '#cccccc';
+      }
+
+      colorsHtml += `
+        <div class="swatch-container">
+          <div class="swatch" style="background:${bg};" 
+               onclick="this.classList.toggle('selected')"></div>
+          <div class="swatch-label">${label}</div>
+        </div>
+      `;
+      hasColors = true;
+    });
   }
+  colorsHtml += '</div>';
 
   document.getElementById("modalBody").innerHTML = `
     <img src="${p.image}" alt="${p.name}">
     <h2>Rs. ${p.price}</h2>
     <p><b>Category:</b> ${p.category}</p>
-    ${colorsHtml}
-    <p style="margin-top:15px; line-height:1.6;">${p.description || "No description available."}</p>
-    <button class="btn" style="margin-top:20px;" onclick="addToCart(${p.id})">➕ Add to Cart</button>
+    ${hasColors ? colorsHtml : '<p style="color:#777; margin:15px 0;">No colors available</p>'}
+    <p style="margin-top:20px; line-height:1.6;">${p.description || "No description available."}</p>
+    <button class="btn" style="margin-top:25px;" onclick="addToCart(${p.id})">➕ Add to Cart</button>
   `;
 
   document.getElementById("productModal").classList.add("active");
@@ -352,15 +396,15 @@ function renderCart() {
   const totalEl = document.getElementById("cartTotal");
   box.innerHTML = "";
 
-  if(cart.length===0){
+  if(cart.length === 0) {
     box.innerHTML = '<p style="text-align:center;opacity:0.7;">Cart is empty 🛒</p>';
     totalEl.innerText = "0";
     return;
   }
 
   let total = 0;
-  cart.forEach(item=>{
-    const prod = products.find(p=>p.id===item.id);
+  cart.forEach(item => {
+    const prod = products.find(p => p.id === item.id);
     if(!prod) return;
     const subt = prod.price * item.qty;
     total += subt;
@@ -382,8 +426,8 @@ function renderCart() {
 }
 
 function placeOrder() {
-  if(cart.length===0) return alert("Cart is empty!");
-  
+  if(cart.length === 0) return alert("Your cart is empty!");
+
   const name = document.getElementById("customerName").value.trim();
   const phone = document.getElementById("customerPhone").value.trim();
   const email = document.getElementById("customerEmail").value.trim();
@@ -394,8 +438,8 @@ function placeOrder() {
   let itemsText = "";
   let grandTotal = 0;
 
-  cart.forEach(i=>{
-    const p = products.find(x=>x.id===i.id);
+  cart.forEach(i => {
+    const p = products.find(x => x.id === i.id);
     if(!p) return;
     const st = p.price * i.qty;
     grandTotal += st;
@@ -417,36 +461,36 @@ function placeOrder() {
   btn.disabled = true;
 
   emailjs.send("service_jole3ot", "template_n8pbmd8", params)
-    .then(()=>{
+    .then(() => {
       showToast("Order Placed Successfully! ♡", "success");
       alert("Order යැව්වා! Thank you!");
       cart = [];
       saveCart();
       renderCart();
       updateCartCount();
-      document.querySelectorAll(".checkout input, .checkout textarea").forEach(el=>el.value="");
+      document.querySelectorAll(".checkout input, .checkout textarea").forEach(el => el.value = "");
     })
-    .catch(err=>{
+    .catch(err => {
       showToast("Order failed – try again", "error");
       console.error(err);
     })
-    .finally(()=>{
-      setTimeout(()=>{
+    .finally(() => {
+      setTimeout(() => {
         btn.innerHTML = txt;
         btn.disabled = false;
-      }, 1500);
+      }, 1800);
     });
 }
 
-// Initial calls
+// Close modal when clicking outside
+document.getElementById("productModal").onclick = e => {
+  if(e.target === document.getElementById("productModal")) closeModal();
+};
+
+// Initial load
 renderProducts();
 renderCart();
 updateCartCount();
-
-// Modal එක එළියට click කළොත් close වෙන්න
-document.getElementById("productModal").addEventListener("click", e=>{
-  if(e.target === document.getElementById("productModal")) closeModal();
-});
 </script>
 </body>
 </html>
