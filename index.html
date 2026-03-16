@@ -155,41 +155,56 @@
     box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
   }
 
-  /* Modal styles - image fix සමග */
+  /* ────────────── Modal styles ────────────── */
   .modal {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000;
-    display: none; align-items: center; justify-content: center; padding: 20px;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
   }
-  .modal.active {display: flex;}
+  .modal.active { display: flex; }
   .modal-content {
-    background: white; max-width: 520px; width: 100%; border-radius: 20px;
-    overflow: hidden; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    background: white;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
   }
   .modal-header {
-    padding: 20px; background: linear-gradient(90deg, #ff69b4, #ff8c00); color: white;
-    text-align: center; font-size: 1.4rem; font-weight: 700;
+    padding: 18px;
+    background: linear-gradient(90deg, #ff69b4, #ff8c00);
+    color: white;
+    text-align: center;
+    font-size: 1.45rem;
+    font-weight: 700;
   }
-  .modal-body {padding: 20px; text-align: center;}
-
+  .modal-body {
+    padding: 20px;
+    text-align: center;
+  }
   .modal-body img {
     width: 90%;
-    max-width: 360px;
-    max-height: 420px;
+    max-width: 340px;
+    max-height: 400px;
     object-fit: contain;
-    border-radius: 16px;
-    margin: 15px auto 25px;
+    border-radius: 12px;
+    margin: 0 auto 20px;
     display: block;
     background: #fff5f7;
-    padding: 15px;
-    box-shadow: 0 6px 20px rgba(255,105,180,0.2);
+    padding: 12px;
+    box-shadow: 0 4px 15px rgba(255,105,180,0.15);
     border: 1px solid #ffe4e1;
   }
-
-  @media (max-width: 500px) {
+  @media (max-width: 480px) {
     .modal-body img {
-      max-height: 320px;
+      max-height: 300px;
       width: 95%;
-      padding: 10px;
     }
   }
 
@@ -207,39 +222,113 @@
     align-items: center;
   }
   .swatch {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    border: 2px solid #fff;
+    border: 2px solid white;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
   .swatch-label {
-    margin-top: 6px;
-    font-size: 0.85rem;
+    margin-top: 5px;
+    font-size: 0.82rem;
     color: #555;
+    max-width: 50px;
+    text-align: center;
   }
 
   .modal-close {
     position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 2.2rem;
+    top: 10px;
+    right: 16px;
+    font-size: 2.1rem;
     color: white;
     cursor: pointer;
     font-weight: bold;
   }
 
-  /* Cart sidebar & other styles ඔයාගේ original එකම තියෙනවා */
-  .cart-sidebar { /* ඔයාගේ original cart styles තියෙන තැනට paste කරගන්න */ }
-  /* toast, footer ආදියත් ඔයාගේ original එකෙන්ම තියාගන්න */
+  /* Cart sidebar (ඔයාගේ original styles තියෙන තැනට paste කරගන්න) */
+  .cart-sidebar { position:fixed; top:0; right:-450px; width:400px; height:100%; /* ... ඔයාගේ original styles ... */ }
+
+  footer {
+    padding: 25px;
+    text-align: center;
+    opacity: .7;
+    font-size: .95rem;
+    color: #555;
+  }
+
+  #toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    z-index: 10000;
+    opacity: 0;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    pointer-events: none;
+    min-width: 220px;
+    text-align: center;
+  }
+  #toast.show {opacity: 1; bottom: 60px;}
+  #toast.success {border-left: 5px solid #ff8c00; color: #ff8c00;}
+  #toast.error {border-left: 5px solid #ff69b4; color: #ff69b4;}
 </style>
 </head>
 <body>
-<!-- ඔයාගේ original header, hero, search-box, products section, about, footer ඔක්කොම තියෙනවා -->
 
-<!-- CART SIDEBAR ඔයාගේ original එකම තියෙනවා -->
+<header>
+  <div class="logo">LARA Cosmetics</div>
+  <nav>
+    <a href="#products">Shop</a>
+    <a href="#about">About</a>
+    <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
+  </nav>
+</header>
 
-<!-- Modal add කරන්න -->
+<section class="hero">
+  <h1>Beauty That Shines ✨</h1>
+  <p>Cosmetics Collection | Lipsticks | Skincare | Perfumes | Makeup Kits</p>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="renderProducts()">
+    <select id="categoryFilter" onchange="renderProducts()">
+      <option value="all">All Categories</option>
+      <option value="Skincare">Skincare</option>
+      <option value="Makeup">Makeup</option>
+      <option value="Perfume">Perfume</option>
+      <option value="Accessories">Accessories</option>
+    </select>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <h2>Our Products 💄</h2>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<section class="hero" id="about">
+  <h1 style="font-size:2.5rem;">About Us</h1>
+  <p style="max-width:850px;margin:15px auto;line-height:1.8;">
+    Welcome to <b>LARA Cosmetics</b>. We provide quality beauty products at affordable prices.
+    Place your order now and it will be sent directly to our email.
+  </p>
+</section>
+
+<footer>
+  © LARA Cosmetics. All Rights Reserved.
+</footer>
+
+<!-- CART SIDEBAR - ඔයාගේ original එකම දාන්න -->
+<div class="cart-sidebar" id="cartSidebar">
+  <!-- ඔයාගේ original cart sidebar content මෙතනට දාන්න -->
+</div>
+
+<!-- Product Detail Modal -->
 <div class="modal" id="productModal">
   <div class="modal-content">
     <span class="modal-close" onclick="closeModal()">×</span>
@@ -248,65 +337,110 @@
   </div>
 </div>
 
-<!-- Toast div ඔයාගේ original එකම තියෙනවා -->
+<!-- Toast -->
+<div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-  // ඔයාගේ original JS code එකේ ඉහතින් තියෙන තැන් ඔක්කොම තියාගන්න
-  // පහත functions විතරක් update / add කරන්න
+// ඔයාගේ original script එකේ ඉහතින් තියෙන තැන් ඔක්කොම තියාගන්න
+// පහත කොටස් විතරක් update කරන්න / replace කරන්න
 
-  function showProductDetail(id) {
-    const p = products.find(x => x.id === id);
-    if (!p) return;
+emailjs.init("W_o_RiuSlVn_zCxlp");
 
-    document.getElementById("modalTitle").textContent = p.name;
-
-    let colorsHtml = '';
-    if (p.colors && p.colors.trim()) {
-      const colors = p.colors.split(',').map(c => c.trim()).filter(Boolean);
-      colorsHtml = '<div class="swatches">';
-      colors.forEach(c => {
-        let bg = c.startsWith('#') ? c : '#cccccc'; // HEX නැත්නම් gray fallback
-        colorsHtml += `<div class="swatch-container">
-          <div class="swatch" style="background:${bg};"></div>
-          <div class="swatch-label">${c}</div>
-        </div>`;
-      });
-      colorsHtml += '</div>';
-    }
-
-    document.getElementById("modalBody").innerHTML = `
-      <img src="${p.image}" alt="${p.name}" 
-           onerror="this.src='https://via.placeholder.com/360x420/ffe4e1/333?text=No+Image';">
-      <h2 style="color:#ff4500; margin:15px 0 10px;">Rs. ${p.price}</h2>
-      <p><b>Category:</b> ${p.category}</p>
-      ${colorsHtml || '<p style="color:#777; margin:15px 0;">No colors available</p>'}
-      <p style="margin-top:20px; line-height:1.6;">${p.description || 'No description available.'}</p>
-      <button class="btn" style="margin-top:25px;" onclick="addToCart(${p.id})">➕ Add to Cart</button>
-    `;
-
-    document.getElementById("productModal").classList.add("active");
-  }
-
-  function closeModal() {
-    document.getElementById("productModal").classList.remove("active");
-  }
-
-  // renderProducts ඇතුළේ card එකට මේක දාන්න (onclick එක add කරන්න)
-  // උදාහරණයක්:
-  // <div class="card" onclick="showProductDetail(${p.id})">
-  //   ... card content ...
-  // </div>
-
-  // Modal එක outside click කළොත් close වෙන්න
-  document.getElementById("productModal").addEventListener("click", e => {
-    if (e.target === document.getElementById("productModal")) closeModal();
+let products = [];
+fetch('https://script.google.com/macros/s/AKfycby0FNsa6h84fanuT5xgOD__MH8L69-ORZSXnJJjk1qmvYZ_SSnrRNgLQUjVQujfh8WN/exec')
+  .then(response => response.json())
+  .then(data => {
+    products = data;
+    renderProducts();
+  })
+  .catch(error => {
+    document.getElementById('productGrid').innerHTML = '<p style="text-align:center; color:#ff69b4; font-size:1.2rem;">Products load කරන්න බැරි වුණා 😢 Refresh කරලා බලන්න</p>';
   });
 
-  // ඔයාගේ original initial calls තියෙන තැනට මේවා එකතු කරන්න
-  // renderProducts();
-  // renderCart();
-  // updateCartCount();
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// ඔයාගේ original functions ඔක්කොම මෙතන තියෙනවා කියලා උපකල්පනය කරනවා
+// (saveCart, showToast, toggleCart, addToCart, removeFromCart, changeQty, updateCartCount, renderCart, placeOrder)
+
+// renderProducts function එක update කරන්න (card එකට onclick එක එකතු කරන්න)
+function renderProducts() {
+  const grid = document.getElementById("productGrid");
+  const search = document.getElementById("searchInput").value.toLowerCase();
+  const category = document.getElementById("categoryFilter").value;
+  grid.innerHTML = "";
+
+  const filtered = products.filter(p => {
+    const matchSearch = p.name.toLowerCase().includes(search);
+    const matchCategory = category === "all" ? true : p.category === category;
+    return matchSearch && matchCategory;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = "<p style='text-align:center;opacity:0.7;font-size:1.2rem;color:#555;'>No products found</p>";
+    return;
+  }
+
+  filtered.forEach(p => {
+    grid.innerHTML += `
+      <div class="card" onclick="showProductDetail(${p.id})">
+        <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/250?text=No+Image';">
+        <h3>${p.name}</h3>
+        <p>Category: ${p.category}</p>
+        <div class="price">Rs. ${p.price}</div>
+        <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">➕ Add to Cart</button>
+      </div>
+    `;
+  });
+}
+
+// Modal functions
+function showProductDetail(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById("modalTitle").textContent = p.name;
+
+  let colorsHtml = '';
+  if (p.colors && p.colors.trim()) {
+    const colors = p.colors.split(',').map(c => c.trim()).filter(Boolean);
+    colorsHtml = '<div class="swatches">';
+    colors.forEach(c => {
+      let bg = c.startsWith('#') ? c : '#cccccc';
+      colorsHtml += `<div class="swatch-container">
+        <div class="swatch" style="background:${bg};"></div>
+        <div class="swatch-label">${c}</div>
+      </div>`;
+    });
+    colorsHtml += '</div>';
+  }
+
+  document.getElementById("modalBody").innerHTML = `
+    <img src="${p.image}" alt="${p.name}"
+         onerror="this.src='https://via.placeholder.com/360x420/ffe4e1/333?text=No+Image';">
+    <h2 style="color:#ff4500; margin:15px 0 10px;">Rs. ${p.price}</h2>
+    <p><b>Category:</b> ${p.category}</p>
+    ${colorsHtml || '<p style="color:#777; margin:15px 0;">No colors available</p>'}
+    <p style="margin-top:20px; line-height:1.6;">${p.description || 'No description available.'}</p>
+    <button class="btn" style="margin-top:25px;" onclick="addToCart(${p.id})">➕ Add to Cart</button>
+  `;
+
+  document.getElementById("productModal").classList.add("active");
+}
+
+function closeModal() {
+  document.getElementById("productModal").classList.remove("active");
+}
+
+// Modal එක එළියට click කළොත් close වෙන්න
+document.getElementById("productModal").addEventListener("click", e => {
+  if (e.target === document.getElementById("productModal")) closeModal();
+});
+
+// ඔයාගේ original initial calls
+renderProducts();
+renderCart();
+updateCartCount();
 </script>
 </body>
 </html>
