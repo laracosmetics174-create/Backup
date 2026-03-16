@@ -6,102 +6,185 @@
 <title>LARA Cosmetics Shop</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
+ 
   body {
     background: linear-gradient(135deg, #fff0f5, #ffe4f0, #f8e0f8);
-    color: #222; overflow-x: hidden;
+    color: #222;
+    overflow-x: hidden;
   }
   header {
-    position: sticky; top:0; z-index:999;
-    padding:18px 6%; background:rgba(255,240,245,0.88);
-    backdrop-filter:blur(12px);
-    display:flex; justify-content:space-between; align-items:center;
-    border-bottom:1px solid rgba(255,105,180,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    padding: 18px 6%;
+    background: rgba(255, 240, 245, 0.88);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 105, 180, 0.2);
   }
   .logo {
-    font-size:1.8rem; font-weight:800;
-    background:linear-gradient(90deg,#ff69b4,#ff8c00,#ff69b4);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff69b4, #ff8c00, #ff69b4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
-  nav {display:flex; align-items:center; gap:20px;}
-  nav a {text-decoration:none; color:#444; font-weight:500; transition:.3s;}
-  nav a:hover {color:#ff69b4;}
+  nav {display:flex;align-items:center;gap:20px;}
+  nav a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    transition: .3s;
+  }
+  nav a:hover {color: #ff69b4;}
   .cart-btn {
-    background:linear-gradient(90deg,#ff69b4,#ff8c00); border:none;
-    padding:10px 18px; border-radius:30px; cursor:pointer;
-    font-weight:700; color:#000; transition:.3s;
+    background: linear-gradient(90deg, #ff69b4, #ff8c00);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    color: #000;
+    transition: .3s;
   }
-  .cart-btn:hover {transform:scale(1.05); box-shadow:0 0 20px rgba(255,105,180,0.5);}
-  
-  .hero {padding:70px 6%; text-align:center;}
+  .cart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+  }
+  .hero {padding: 70px 6%; text-align: center;}
   .hero h1 {
-    font-size:clamp(2.8rem,8vw,5rem); font-weight:900;
-    background:linear-gradient(90deg,#ff1493,#ff69b4,#ff8c00,#ff1493);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
+    font-size: clamp(2.8rem,8vw,5rem);
+    font-weight: 900;
+    background: linear-gradient(90deg, #ff1493, #ff69b4, #ff8c00, #ff1493);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
-  .hero p {margin-top:15px; font-size:1.2rem; color:#555;}
-  
-  .search-box {margin:40px auto 0; max-width:650px; display:flex; gap:10px; justify-content:center;}
-  .search-box input, .search-box select {
-    padding:12px 15px; border-radius:10px; border:1px solid #ffb6c1;
-    outline:none; font-size:1rem; background:white; color:#222;
+  .hero p {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #555;
   }
-  .search-box input {flex:1;}
-  .search-box select {width:220px; cursor:pointer;}
-  
-  .products {padding:40px 6% 80px;}
-  .products h2 {text-align:center; font-size:2.5rem; margin-bottom:30px; color:#ff69b4;}
+  .search-box {
+    margin: 40px auto 0;
+    max-width: 650px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .search-box input,
+  .search-box select {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ffb6c1;
+    outline: none;
+    font-size: 1rem;
+    width: 100%;
+    background: white;
+    color: #222;
+  }
+  .search-box select {width: 220px; cursor: pointer;}
+  .products {padding: 40px 6% 80px;}
+  .products h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #ff69b4;
+  }
   .product-grid {
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
   }
   .card {
-    background:rgba(255,245,247,0.85); border:1px solid #ffb6c1; border-radius:18px;
-    padding:18px; transition:.3s; backdrop-filter:blur(12px);
-    box-shadow:0 4px 20px rgba(255,105,180,0.1); cursor:pointer;
+    background: rgba(255, 245, 247, 0.85);
+    border: 1px solid #ffb6c1;
+    border-radius: 18px;
+    padding: 18px;
+    transition: .3s;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.1);
+    cursor: pointer;
   }
-  .card:hover {transform:translateY(-10px); border-color:#ff69b4; box-shadow:0 8px 30px rgba(255,105,180,0.2);}
-  .card img {width:100%; height:220px; object-fit:cover; border-radius:15px;}
-  .card h3 {margin-top:12px; font-size:1.2rem; color:#333;}
-  .card p {margin-top:6px; font-size:1rem; color:#555;}
-  .price {margin-top:10px; font-size:1.2rem; font-weight:800; color:#ff4500;}
+  .card:hover {
+    transform: translateY(-10px);
+    border-color: #ff69b4;
+    box-shadow: 0 8px 30px rgba(255, 105, 180, 0.2);
+  }
+  .card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+  .card h3 {
+    margin-top: 12px;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  .card p {
+    margin-top: 6px;
+    font-size: 1rem;
+    color: #555;
+  }
+  .price {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ff4500;
+  }
   .btn {
-    margin-top:14px; width:100%; padding:12px; border:none; border-radius:12px;
-    cursor:pointer; font-size:1rem; font-weight:700;
-    background:linear-gradient(90deg,#ff69b4,#ff8c00); color:#000; transition:.3s;
+    margin-top: 14px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff69b4, #ff8c00);
+    color: #000;
+    transition: .3s;
   }
-  .btn:hover {transform:scale(1.03); box-shadow:0 0 20px rgba(255,105,180,0.5);}
+  .btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+  }
 
-  /* Modal */
+  /* Modal styles - image fix සමග */
   .modal {
-    position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:10000;
-    display:none; align-items:center; justify-content:center; padding:20px;
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000;
+    display: none; align-items: center; justify-content: center; padding: 20px;
   }
-  .modal.active {display:flex;}
+  .modal.active {display: flex;}
   .modal-content {
-    background:white; max-width:520px; width:100%; border-radius:20px;
-    overflow:hidden; position:relative; box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    background: white; max-width: 520px; width: 100%; border-radius: 20px;
+    overflow: hidden; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
   }
   .modal-header {
-    padding:20px; background:linear-gradient(90deg,#ff69b4,#ff8c00); color:white;
-    text-align:center; font-size:1.4rem; font-weight:700;
+    padding: 20px; background: linear-gradient(90deg, #ff69b4, #ff8c00); color: white;
+    text-align: center; font-size: 1.4rem; font-weight: 700;
   }
-  .modal-body {padding:20px; text-align:center;}
-  
-  /* Improved Product Image Styling */
+  .modal-body {padding: 20px; text-align: center;}
+
   .modal-body img {
     width: 90%;
-    max-width: 360px;               /* ගොඩක් විශාල නොවෙන්න limit එකක් */
-    max-height: 380px;              /* උස limit එක වැඩි කළා – ඔයාගේ බෝතල් එක හොඳින් පේයි */
-    object-fit: contain;            /* stretch නොකර aspect ratio තියාගන්නවා */
+    max-width: 360px;
+    max-height: 420px;
+    object-fit: contain;
     border-radius: 16px;
     margin: 15px auto 25px;
     display: block;
-    background: linear-gradient(135deg, #fff5f7, #ffeef2); /* soft pink background */
+    background: #fff5f7;
     padding: 15px;
-    box-shadow: 0 6px 20px rgba(255,105,180,0.18);
+    box-shadow: 0 6px 20px rgba(255,105,180,0.2);
     border: 1px solid #ffe4e1;
   }
 
-  /* Mobile එකේ image තවත් හොඳින් fit වෙන්න */
   @media (max-width: 500px) {
     .modal-body img {
       max-height: 320px;
@@ -110,57 +193,53 @@
     }
   }
 
-  /* Color Swatches */
+  /* Color swatches */
   .swatches {
-    margin:15px 0; display:flex; flex-wrap:wrap; gap:14px; justify-content:center;
+    margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
   }
   .swatch-container {
-    display:flex; flex-direction:column; align-items:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .swatch {
-    width:44px; height:44px; border-radius:50%;
-    border:2px solid #fff; box-shadow:0 2px 10px rgba(0,0,0,0.15);
-    cursor:pointer; transition:all 0.25s;
-  }
-  .swatch:hover {
-    transform:scale(1.18); box-shadow:0 4px 14px rgba(255,105,180,0.4);
-  }
-  .swatch.selected {
-    border:4px solid #ff69b4; box-shadow:0 0 0 5px rgba(255,105,180,0.25);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
   .swatch-label {
-    margin-top:6px; font-size:0.85rem; color:#555;
-    max-width:60px; text-align:center; line-height:1.2;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: #555;
   }
 
   .modal-close {
-    position:absolute; top:12px; right:18px; font-size:2.2rem; color:white;
-    cursor:pointer; font-weight:bold;
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 2.2rem;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
   }
 
-  /* Rest of your styles (cart, toast, etc.) remain the same */
-  .cart-sidebar { /* ... your existing cart styles ... */ }
-  /* ... other styles like footer, toast ... */
-
+  /* Cart sidebar & other styles ඔයාගේ original එකම තියෙනවා */
+  .cart-sidebar { /* ඔයාගේ original cart styles තියෙන තැනට paste කරගන්න */ }
+  /* toast, footer ආදියත් ඔයාගේ original එකෙන්ම තියාගන්න */
 </style>
 </head>
 <body>
+<!-- ඔයාගේ original header, hero, search-box, products section, about, footer ඔක්කොම තියෙනවා -->
 
-<!-- Your HTML structure remains the same -->
-<header>
-  <div class="logo">LARA Cosmetics</div>
-  <nav>
-    <a href="#products">Shop</a>
-    <a href="#about">About</a>
-    <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
-  </nav>
-</header>
+<!-- CART SIDEBAR ඔයාගේ original එකම තියෙනවා -->
 
-<!-- hero, products, about, footer sections same as before -->
-
-<!-- CART SIDEBAR same -->
-
-<!-- Product Detail Modal -->
+<!-- Modal add කරන්න -->
 <div class="modal" id="productModal">
   <div class="modal-content">
     <span class="modal-close" onclick="closeModal()">×</span>
@@ -169,75 +248,65 @@
   </div>
 </div>
 
-<!-- Toast -->
-<div id="toast"></div>
+<!-- Toast div ඔයාගේ original එකම තියෙනවා -->
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-// Your existing JavaScript code remains almost the same
-// Only showProductDetail function has small update for better image handling
+  // ඔයාගේ original JS code එකේ ඉහතින් තියෙන තැන් ඔක්කොම තියාගන්න
+  // පහත functions විතරක් update / add කරන්න
 
-// ... all other functions same ...
+  function showProductDetail(id) {
+    const p = products.find(x => x.id === id);
+    if (!p) return;
 
-function showProductDetail(id) {
-  const p = products.find(x => x.id === id);
-  if (!p) return alert("Product not found");
+    document.getElementById("modalTitle").textContent = p.name;
 
-  document.getElementById("modalTitle").textContent = p.name;
+    let colorsHtml = '';
+    if (p.colors && p.colors.trim()) {
+      const colors = p.colors.split(',').map(c => c.trim()).filter(Boolean);
+      colorsHtml = '<div class="swatches">';
+      colors.forEach(c => {
+        let bg = c.startsWith('#') ? c : '#cccccc'; // HEX නැත්නම් gray fallback
+        colorsHtml += `<div class="swatch-container">
+          <div class="swatch" style="background:${bg};"></div>
+          <div class="swatch-label">${c}</div>
+        </div>`;
+      });
+      colorsHtml += '</div>';
+    }
 
-  let colorsHtml = '<div class="swatches">';
-  let hasColors = false;
+    document.getElementById("modalBody").innerHTML = `
+      <img src="${p.image}" alt="${p.name}" 
+           onerror="this.src='https://via.placeholder.com/360x420/ffe4e1/333?text=No+Image';">
+      <h2 style="color:#ff4500; margin:15px 0 10px;">Rs. ${p.price}</h2>
+      <p><b>Category:</b> ${p.category}</p>
+      ${colorsHtml || '<p style="color:#777; margin:15px 0;">No colors available</p>'}
+      <p style="margin-top:20px; line-height:1.6;">${p.description || 'No description available.'}</p>
+      <button class="btn" style="margin-top:25px;" onclick="addToCart(${p.id})">➕ Add to Cart</button>
+    `;
 
-  if (p.colors && p.colors.trim()) {
-    const colorList = p.colors.split(",").map(c => c.trim()).filter(Boolean);
-    
-    colorList.forEach(color => {
-      let bg = color;
-      let label = color;
-
-      if (!color.startsWith('#')) {
-        const map = {
-          'red': '#ff0000', 'pink': '#ffc0cb', 'matte pink': '#ff69b4',
-          'coral': '#ff7f50', 'burgundy': '#800020', 'nude': '#f5c6a5',
-          'clear': '#f0f8ff', 'transparent': '#ffffff00', 'gel': '#e0f7fa'
-          // ඔයාගේ products වලට match වෙන colors add කරගන්න
-        };
-        bg = map[color.toLowerCase()] || '#cccccc';
-      }
-
-      colorsHtml += `
-        <div class="swatch-container">
-          <div class="swatch" style="background:${bg};" 
-               onclick="this.classList.toggle('selected')"></div>
-          <div class="swatch-label">${label}</div>
-        </div>
-      `;
-      hasColors = true;
-    });
+    document.getElementById("productModal").classList.add("active");
   }
-  colorsHtml += '</div>';
 
-  document.getElementById("modalBody").innerHTML = `
-    <img src="${p.image}" 
-         alt="${p.name}" 
-         onerror="this.src='https://via.placeholder.com/360x380/ffe4e1/333333?text=Image+Not+Found'; this.style.padding='20px';"
-         loading="lazy">
-    <h2 style="color:#ff4500; margin:10px 0;">Rs. ${p.price}</h2>
-    <p style="margin:8px 0;"><b>Category:</b> ${p.category}</p>
-    ${hasColors ? colorsHtml : '<p style="color:#777; margin:20px 0;">No colors specified</p>'}
-    <p style="margin-top:25px; line-height:1.6; color:#444;">${p.description || "No description available yet."}</p>
-    <button class="btn" style="margin-top:30px; max-width:320px;" onclick="addToCart(${p.id})">➕ Add to Cart</button>
-  `;
+  function closeModal() {
+    document.getElementById("productModal").classList.remove("active");
+  }
 
-  document.getElementById("productModal").classList.add("active");
-}
+  // renderProducts ඇතුළේ card එකට මේක දාන්න (onclick එක add කරන්න)
+  // උදාහරණයක්:
+  // <div class="card" onclick="showProductDetail(${p.id})">
+  //   ... card content ...
+  // </div>
 
-// ... rest of your JS code (closeModal, renderCart, placeOrder, etc.) same as before ...
+  // Modal එක outside click කළොත් close වෙන්න
+  document.getElementById("productModal").addEventListener("click", e => {
+    if (e.target === document.getElementById("productModal")) closeModal();
+  });
 
-// Initial calls
-renderProducts();
-renderCart();
-updateCartCount();
+  // ඔයාගේ original initial calls තියෙන තැනට මේවා එකතු කරන්න
+  // renderProducts();
+  // renderCart();
+  // updateCartCount();
 </script>
 </body>
 </html>
