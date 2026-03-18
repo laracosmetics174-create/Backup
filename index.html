@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="si">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,7 +11,7 @@
     background: linear-gradient(135deg, #fff0f5, #ffe4f0, #f8e0f8);
     color: #222;
     overflow-x: hidden;
-    font-family: 'Noto Sans Sinhala', 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', 'Noto Sans Sinhala', sans-serif;
   }
   header {
     position: sticky;
@@ -400,9 +400,9 @@
   <h1>Beauty That Shines ✨</h1>
   <p>Cosmetics Collection | Lipsticks | Skincare | Perfumes | Makeup Kits</p>
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="නිෂ්පාදන සොයන්න..." onkeyup="renderProducts()">
+    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="renderProducts()">
     <select id="categoryFilter" onchange="renderProducts()">
-      <option value="all">සියලු කාණ්ඩ</option>
+      <option value="all">All Categories</option>
       <option value="Skincare">Skincare</option>
       <option value="Makeup">Makeup</option>
       <option value="Perfume">Perfume</option>
@@ -412,39 +412,39 @@
 </section>
 
 <section class="products" id="products">
-  <h2>අපේ නිෂ්පාදන 💄</h2>
+  <h2>Our Products 💄</h2>
   <div class="product-grid" id="productGrid"></div>
 </section>
 
 <section class="hero" id="about">
-  <h1 style="font-size:2.5rem;">අපි ගැන</h1>
+  <h1 style="font-size:2.5rem;">About Us</h1>
   <p style="max-width:850px;margin:15px auto;line-height:1.8;">
-    <b>LARA Cosmetics</b> වෙත සාදරයෙන් පිළිගනිමු. අපි ඔබට ගුණාත්මක රූපලාවන්‍ය නිෂ්පාදන සාධාරණ මිලකට ලබා දෙනවා.
-    දැන් ඔබේ ඇණවුම තබන්න – එය අපේ email එකට සෘජුව යවනවා.
+    Welcome to <b>LARA Cosmetics</b>. We provide quality beauty products at affordable prices.
+    Place your order now – it will be sent directly to our email.
   </p>
 </section>
 
 <footer>
-  © LARA Cosmetics. සියලුම හිමිකම් ඇත.
+  © LARA Cosmetics. All Rights Reserved.
 </footer>
 
 <!-- CART SIDEBAR -->
 <div class="cart-sidebar" id="cartSidebar">
   <div class="cart-header">
-    <h2>ඔබේ කූඩය 🛍️</h2>
+    <h2>Your Cart 🛍️</h2>
     <span class="close-btn" onclick="toggleCart()">✖</span>
   </div>
   <div class="cart-items" id="cartItems"></div>
   <div class="total-box">
-    <h3>එකතුව: Rs. <span id="cartTotal">0</span></h3>
+    <h3>Total: Rs. <span id="cartTotal">0</span></h3>
   </div>
   <div class="checkout">
-    <h3>ඇණවුම් විස්තර</h3>
-    <input type="text" id="customerName" placeholder="ඔබේ නම">
-    <input type="text" id="customerPhone" placeholder="දුරකථන අංකය">
-    <input type="email" id="customerEmail" placeholder="Email (අමතරයි)">
-    <textarea id="customerAddress" placeholder="බෙදාහැරීමේ ලිපිනය"></textarea>
-    <button class="order-btn" onclick="placeOrder()">📩 ඇණවුම තබන්න</button>
+    <h3>Checkout Details</h3>
+    <input type="text" id="customerName" placeholder="Your Name">
+    <input type="text" id="customerPhone" placeholder="Phone Number">
+    <input type="email" id="customerEmail" placeholder="Email (optional)">
+    <textarea id="customerAddress" placeholder="Delivery Address"></textarea>
+    <button class="order-btn" onclick="placeOrder()">📩 Place Order</button>
   </div>
 </div>
 
@@ -458,18 +458,18 @@
     <p id="modalCategory"></p>
     
     <div class="colours-section">
-      <h4>ලබා ගත හැකි වර්ණ:</h4>
+      <h4>Available Colours:</h4>
       <div class="colour-chips-wrapper">
         <div id="modalColours" class="colour-chips"></div>
       </div>
     </div>
     
     <div style="margin-top:25px; text-align:left;">
-      <h4 style="color:#ff69b4; margin-bottom:10px;">විස්තර:</h4>
+      <h4 style="color:#ff69b4; margin-bottom:10px;">Details:</h4>
       <p id="modalDetails"></p>
     </div>
     
-    <button class="btn" style="margin-top:30px;" onclick="addToCartFromModal()">➕ කූඩයට එකතු කරන්න</button>
+    <button class="btn" style="margin-top:30px;" onclick="addToCartFromModal()">➕ Add to Cart</button>
   </div>
 </div>
 
@@ -484,8 +484,8 @@ let products = [];
 let currentProduct = null;
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Correct URL - ඔයාගේ පරණ working link එක
-fetch('https://script.google.com/macros/s/AKfycbz4Qdm79XmIE2hi1f2QpOXOklHKV_wCoEVrj9d84MIA6DH9fLVVIv49deGWgfSM6kzY/exec')
+// Use your correct Apps Script URL here
+fetch('https://script.google.com/macros/s/AKfycbwkohVkh_HWx9BWDzVa1rN53JThB_iw05Ercm5gtmauU4APOAsGscnEUxMd36G8A5to/exec')
   .then(response => {
     if (!response.ok) throw new Error("Fetch failed: " + response.status);
     return response.json();
@@ -497,7 +497,7 @@ fetch('https://script.google.com/macros/s/AKfycbz4Qdm79XmIE2hi1f2QpOXOklHKV_wCoE
   .catch(err => {
     console.error(err);
     document.getElementById('productGrid').innerHTML = 
-      '<p style="text-align:center;color:#ff4444;font-size:1.3rem;">නිෂ්පාදන ලෝඩ් කරන්න බැරි වුණා 😢<br>Internet බලලා refresh කරන්න</p>';
+      '<p style="text-align:center;color:#ff4444;font-size:1.3rem;">Failed to load products 😢<br>Check internet and refresh</p>';
   });
 
 function saveCart() { localStorage.setItem("cart", JSON.stringify(cart)); }
@@ -521,7 +521,7 @@ function addToCart(productId) {
   saveCart();
   renderCart();
   updateCartCount();
-  showToast("කූඩයට එකතු වුණා ✓");
+  showToast("Added to cart ✓");
 }
 
 function removeFromCart(productId) {
@@ -561,7 +561,7 @@ function renderProducts() {
   });
 
   if (filtered.length === 0) {
-    grid.innerHTML = "<p style='text-align:center;opacity:0.7;font-size:1.2rem;color:#555;'>කිසිවක් හමු නොවුණා 😔</p>";
+    grid.innerHTML = "<p style='text-align:center;opacity:0.7;font-size:1.2rem;color:#555;'>No products found 😔</p>";
     return;
   }
 
@@ -569,10 +569,10 @@ function renderProducts() {
     grid.innerHTML += `
       <div class="card" onclick="showProductDetails(${p.id})">
         <img src="${p.image || 'https://via.placeholder.com/250?text=No+Image'}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/250?text=No+Image';">
-        <h3>${p.name || 'නම නැත'}</h3>
-        <p>කාණ්ඩය: ${p.category || 'N/A'}</p>
+        <h3>${p.name || 'No Name'}</h3>
+        <p>Category: ${p.category || 'N/A'}</p>
         <div class="price">Rs. ${p.price || 0}</div>
-        <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">➕ කූඩයට එකතු කරන්න</button>
+        <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">➕ Add to Cart</button>
       </div>
     `;
   });
@@ -585,9 +585,9 @@ function showProductDetails(productId) {
   currentProduct = product;
 
   document.getElementById("modalImage").src = product.image || 'https://via.placeholder.com/400?text=No+Image';
-  document.getElementById("modalName").textContent = product.name || 'නම නැත';
+  document.getElementById("modalName").textContent = product.name || 'No Name';
   document.getElementById("modalPrice").textContent = product.price || 0;
-  document.getElementById("modalCategory").textContent = "කාණ්ඩය: " + (product.category || "N/A");
+  document.getElementById("modalCategory").textContent = "Category: " + (product.category || "N/A");
 
   const coloursDiv = document.getElementById("modalColours");
   coloursDiv.innerHTML = "";
@@ -600,11 +600,11 @@ function showProductDetails(productId) {
       coloursDiv.appendChild(chip);
     });
   } else {
-    coloursDiv.innerHTML = "<p style='color:#777;'>වර්ණ ලැයිස්තුවක් නැත</p>";
+    coloursDiv.innerHTML = "<p style='color:#777;'>No colours listed</p>";
   }
 
   document.getElementById("modalDetails").textContent = 
-    product.details || "වැඩි විස්තර තවමත් එකතු කර නොමැත.";
+    product.details || "No additional details available.";
 
   document.getElementById("productModal").style.display = "block";
 }
@@ -618,7 +618,7 @@ function addToCartFromModal() {
   if (currentProduct) {
     addToCart(currentProduct.id);
     closeModal();
-    showToast("විස්තරෙන් කූඩයට එකතු වුණා ✓");
+    showToast("Added from details ✓");
   }
 }
 
@@ -633,7 +633,7 @@ function renderCart() {
   cartItemsBox.innerHTML = "";
 
   if (cart.length === 0) {
-    cartItemsBox.innerHTML = "<p style='opacity:0.7;text-align:center;margin-top:20px;color:#555;'>කූඩය හිස් 🛒</p>";
+    cartItemsBox.innerHTML = "<p style='opacity:0.7;text-align:center;margin-top:20px;color:#555;'>Cart is empty 🛒</p>";
     cartTotalBox.innerText = "0";
     return;
   }
@@ -646,12 +646,12 @@ function renderCart() {
     total += subTotal;
     cartItemsBox.innerHTML += `
       <div class="cart-item">
-        <h4>${product.name || 'නම නැත'}</h4>
+        <h4>${product.name || 'No Name'}</h4>
         <p>Rs. ${product.price || 0} × ${item.qty} = <b>Rs. ${subTotal}</b></p>
         <div class="cart-controls">
           <button class="qty-btn" onclick="changeQty(${item.id}, -1)">➖</button>
           <button class="qty-btn" onclick="changeQty(${item.id}, 1)">➕</button>
-          <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑 ඉවත් කරන්න</button>
+          <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑 Remove</button>
         </div>
       </div>
     `;
@@ -660,14 +660,14 @@ function renderCart() {
 }
 
 function placeOrder() {
-  if (cart.length === 0) return alert("කූඩය හිස්!");
+  if (cart.length === 0) return alert("Your cart is empty!");
   
   const name    = document.getElementById("customerName").value.trim();
   const phone   = document.getElementById("customerPhone").value.trim();
   const email   = document.getElementById("customerEmail").value.trim();
   const address = document.getElementById("customerAddress").value.trim();
 
-  if (!name || !phone || !address) return alert("නම, දුරකථන අංකය සහ ලිපිනය අනිවාර්යයි!");
+  if (!name || !phone || !address) return alert("Name, Phone and Address are required!");
 
   let orderText = "";
   let total = 0;
@@ -676,13 +676,13 @@ function placeOrder() {
     if (!product) return;
     const sub = (product.price || 0) * item.qty;
     total += sub;
-    orderText += `• ${product.name || 'නම නැත'} (Rs.${product.price || 0}) x ${item.qty} = Rs.${sub}\n`;
+    orderText += `• ${product.name || 'No Name'} (Rs.${product.price || 0}) x ${item.qty} = Rs.${sub}\n`;
   });
 
   const templateParams = {
     customer_name: name,
     customer_phone: phone,
-    customer_email: email || "නොදක්වා ඇත",
+    customer_email: email || "Not Provided",
     customer_address: address,
     order_items: orderText,
     total_price: total
@@ -690,13 +690,13 @@ function placeOrder() {
 
   const orderBtn = document.querySelector(".order-btn");
   const originalText = orderBtn.innerHTML;
-  orderBtn.innerHTML = "⏳ රැඳෙන්න...";
+  orderBtn.innerHTML = "⏳ Please wait...";
   orderBtn.disabled = true;
 
   emailjs.send("service_jole3ot", "template_n8pbmd8", templateParams)
     .then(() => {
-      showToast("ඇණවුම යැව්වා! ස්තූතියි ♡", "success");
-      alert("✅ ඇණවුම සාර්ථකව යැව්වා!");
+      showToast("Order sent! Thank you ♡", "success");
+      alert("✅ Order placed successfully!");
       cart = [];
       localStorage.removeItem("cart");
       renderCart();
@@ -707,7 +707,7 @@ function placeOrder() {
       document.getElementById("customerAddress").value = "";
     })
     .catch(err => {
-      showToast("ඇණවුම යැවීම අසාර්ථකයි – බලන්න connection එක", "error");
+      showToast("Failed to send order – check connection", "error");
       console.error(err);
     })
     .finally(() => {
