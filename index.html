@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="si">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>LARA Cosmetics Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
- 
+  *{margin:0;padding:0;box-sizing:border-box;}
   body {
     background: linear-gradient(135deg, #fff0f5, #ffe4f0, #f8e0f8);
     color: #222;
     overflow-x: hidden;
+    font-family: 'Noto Sans Sinhala', 'Segoe UI', sans-serif;
   }
   header {
     position: sticky;
@@ -63,11 +64,7 @@
     background-clip: text;
     color: transparent;
   }
-  .hero p {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    color: #555;
-  }
+  .hero p {margin-top: 15px; font-size: 1.2rem; color: #555;}
   .search-box {
     margin: 40px auto 0;
     max-width: 650px;
@@ -121,16 +118,8 @@
     object-fit: cover;
     border-radius: 15px;
   }
-  .card h3 {
-    margin-top: 12px;
-    font-size: 1.2rem;
-    color: #333;
-  }
-  .card p {
-    margin-top: 6px;
-    font-size: 1rem;
-    color: #555;
-  }
+  .card h3 {margin-top: 12px; font-size: 1.2rem; color: #333;}
+  .card p {margin-top: 6px; font-size: 1rem; color: #555;}
   .price {
     margin-top: 10px;
     font-size: 1.2rem;
@@ -155,100 +144,96 @@
     box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
   }
 
-  /* ────────────── Modal styles ────────────── */
-  .modal {
+  /* Cart Sidebar */
+  .cart-sidebar {
     position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.65);
-    z-index: 10000;
-    display: none;
-    align-items: center;
-    justify-content: center;
+    top: 0;
+    right: -450px;
+    width: 400px;
+    height: 100%;
+    background: rgba(255, 240, 245, 0.97);
+    backdrop-filter: blur(15px);
     padding: 20px;
+    transition: .4s;
+    z-index: 9999;
+    border-left: 1px solid #ffb6c1;
+    overflow-y: auto;
+    color: #222;
   }
-  .modal.active { display: flex; }
-  .modal-content {
-    background: white;
-    max-width: 500px;
-    width: 100%;
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
-  }
-  .modal-header {
-    padding: 18px;
-    background: linear-gradient(90deg, #ff69b4, #ff8c00);
-    color: white;
-    text-align: center;
-    font-size: 1.45rem;
-    font-weight: 700;
-  }
-  .modal-body {
-    padding: 20px;
-    text-align: center;
-  }
-  .modal-body img {
-    width: 90%;
-    max-width: 340px;
-    max-height: 400px;
-    object-fit: contain;
-    border-radius: 12px;
-    margin: 0 auto 20px;
-    display: block;
-    background: #fff5f7;
+  .cart-sidebar.active {right: 0;}
+  .cart-header {display: flex; justify-content: space-between; align-items: center;}
+  .cart-header h2 {font-size: 1.6rem; color: #ff69b4;}
+  .close-btn {cursor: pointer; font-size: 1.8rem; font-weight: 800; color: #ff69b4;}
+  .cart-items {margin-top: 20px;}
+  .cart-item {
+    background: rgba(255,255,255,0.7);
     padding: 12px;
-    box-shadow: 0 4px 15px rgba(255,105,180,0.15);
-    border: 1px solid #ffe4e1;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ffb6c1;
   }
-  @media (max-width: 480px) {
-    .modal-body img {
-      max-height: 300px;
-      width: 95%;
-    }
-  }
-
-  /* Color swatches */
-  .swatches {
-    margin: 15px 0;
+  .cart-item h4 {font-size: 1rem; color: #333;}
+  .cart-item p {font-size: .95rem; color: #555; margin-top: 5px;}
+  .cart-controls {
+    margin-top: 10px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-  }
-  .swatch-container {
-    display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    gap: 5px;
   }
-  .swatch {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 2px solid white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  }
-  .swatch-label {
-    margin-top: 5px;
-    font-size: 0.82rem;
-    color: #555;
-    max-width: 50px;
-    text-align: center;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 10px;
-    right: 16px;
-    font-size: 2.1rem;
-    color: white;
+  .qty-btn, .remove-btn {
+    background: #ff69b4;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 800;
+    color: #000;
   }
-
-  /* Cart sidebar (ඔයාගේ original styles තියෙන තැනට paste කරගන්න) */
-  .cart-sidebar { position:fixed; top:0; right:-450px; width:400px; height:100%; /* ... ඔයාගේ original styles ... */ }
-
+  .remove-btn {background: #ff8c00;}
+  .total-box {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid #ffb6c1;
+  }
+  .total-box h3 {font-size: 1.3rem; color: #ff69b4;}
+  .checkout {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid #ffb6c1;
+  }
+  .checkout h3 {color: #ff69b4; margin-bottom: 10px;}
+  .checkout input, .checkout textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ffb6c1;
+    outline: none;
+    background: white;
+    color: #222;
+  }
+  .checkout textarea {height: 80px; resize: none;}
+  .order-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff8c00, #ff69b4);
+    color: #000;
+  }
+  .order-btn:hover {
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    transform: scale(1.02);
+  }
   footer {
     padding: 25px;
     text-align: center;
@@ -257,6 +242,7 @@
     color: #555;
   }
 
+  /* Toast */
   #toast {
     position: fixed;
     bottom: 30px;
@@ -278,6 +264,125 @@
   #toast.show {opacity: 1; bottom: 60px;}
   #toast.success {border-left: 5px solid #ff8c00; color: #ff8c00;}
   #toast.error {border-left: 5px solid #ff69b4; color: #ff69b4;}
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+  }
+  .modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 25px 25px 40px;
+    border-radius: 20px;
+    width: 92%;
+    max-width: 560px;
+    max-height: 88vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 12px 50px rgba(255,105,180,0.45);
+    text-align: center;
+    scrollbar-width: thin;
+    scrollbar-color: #ff69b4 #fff5f8;
+  }
+  .modal-content::-webkit-scrollbar {
+    width: 8px;
+  }
+  .modal-content::-webkit-scrollbar-track {
+    background: #fff5f8;
+    border-radius: 10px;
+  }
+  .modal-content::-webkit-scrollbar-thumb {
+    background: #ff69b4;
+    border-radius: 10px;
+  }
+  .modal-content::-webkit-scrollbar-thumb:hover {
+    background: #ff1493;
+  }
+  .close-modal {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 2.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #ff69b4;
+  }
+  #modalImage {
+    width: 100%;
+    max-height: 340px;
+    object-fit: contain;
+    border-radius: 16px;
+    margin-bottom: 18px;
+  }
+  .modal-price {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #ff4500;
+    margin: 12px 0;
+  }
+  .colours-section {
+    margin: 22px 0;
+    text-align: left;
+  }
+  .colours-section h4 {
+    margin-bottom: 12px;
+    color: #ff69b4;
+  }
+  .colour-chips-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .colour-chips {
+    display: inline-flex;
+    gap: 14px;
+  }
+  .colour-chip {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-size: 1rem;
+    border: 1px solid #ffb6c1;
+    background: #fff0f5;
+    color: #333;
+    white-space: nowrap;
+    cursor: default;
+    transition: all 0.2s;
+  }
+  .colour-chip:hover {
+    background: #ff69b4;
+    color: white;
+    border-color: #ff69b4;
+    transform: scale(1.05);
+  }
+  .colour-chips-wrapper::-webkit-scrollbar {
+    height: 6px;
+  }
+  .colour-chips-wrapper::-webkit-scrollbar-track {
+    background: #fff5f8;
+    border-radius: 10px;
+  }
+  .colour-chips-wrapper::-webkit-scrollbar-thumb {
+    background: #ff69b4;
+    border-radius: 10px;
+  }
+  #modalDetails {
+    margin-top: 18px;
+    line-height: 1.7;
+    color: #444;
+    font-size: 1.05rem;
+    white-space: pre-wrap;
+    text-align: left;
+  }
 </style>
 </head>
 <body>
@@ -295,9 +400,9 @@
   <h1>Beauty That Shines ✨</h1>
   <p>Cosmetics Collection | Lipsticks | Skincare | Perfumes | Makeup Kits</p>
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="renderProducts()">
+    <input type="text" id="searchInput" placeholder="නිෂ්පාදන සොයන්න..." onkeyup="renderProducts()">
     <select id="categoryFilter" onchange="renderProducts()">
-      <option value="all">All Categories</option>
+      <option value="all">සියලු කාණ්ඩ</option>
       <option value="Skincare">Skincare</option>
       <option value="Makeup">Makeup</option>
       <option value="Perfume">Perfume</option>
@@ -307,33 +412,64 @@
 </section>
 
 <section class="products" id="products">
-  <h2>Our Products 💄</h2>
+  <h2>අපේ නිෂ්පාදන 💄</h2>
   <div class="product-grid" id="productGrid"></div>
 </section>
 
 <section class="hero" id="about">
-  <h1 style="font-size:2.5rem;">About Us</h1>
+  <h1 style="font-size:2.5rem;">අපි ගැන</h1>
   <p style="max-width:850px;margin:15px auto;line-height:1.8;">
-    Welcome to <b>LARA Cosmetics</b>. We provide quality beauty products at affordable prices.
-    Place your order now and it will be sent directly to our email.
+    <b>LARA Cosmetics</b> වෙත සාදරයෙන් පිළිගනිමු. අපි ඔබට ගුණාත්මක රූපලාවන්‍ය නිෂ්පාදන සාධාරණ මිලකට ලබා දෙනවා.
+    දැන් ඔබේ ඇණවුම තබන්න – එය අපේ email එකට සෘජුව යවනවා.
   </p>
 </section>
 
 <footer>
-  © LARA Cosmetics. All Rights Reserved.
+  © LARA Cosmetics. සියලුම හිමිකම් ඇත.
 </footer>
 
-<!-- CART SIDEBAR - ඔයාගේ original එකම දාන්න -->
+<!-- CART SIDEBAR -->
 <div class="cart-sidebar" id="cartSidebar">
-  <!-- ඔයාගේ original cart sidebar content මෙතනට දාන්න -->
+  <div class="cart-header">
+    <h2>ඔබේ කූඩය 🛍️</h2>
+    <span class="close-btn" onclick="toggleCart()">✖</span>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="total-box">
+    <h3>එකතුව: Rs. <span id="cartTotal">0</span></h3>
+  </div>
+  <div class="checkout">
+    <h3>ඇණවුම් විස්තර</h3>
+    <input type="text" id="customerName" placeholder="ඔබේ නම">
+    <input type="text" id="customerPhone" placeholder="දුරකථන අංකය">
+    <input type="email" id="customerEmail" placeholder="Email (අමතරයි)">
+    <textarea id="customerAddress" placeholder="බෙදාහැරීමේ ලිපිනය"></textarea>
+    <button class="order-btn" onclick="placeOrder()">📩 ඇණවුම තබන්න</button>
+  </div>
 </div>
 
-<!-- Product Detail Modal -->
+<!-- Product Details Modal -->
 <div class="modal" id="productModal">
   <div class="modal-content">
-    <span class="modal-close" onclick="closeModal()">×</span>
-    <div class="modal-header" id="modalTitle"></div>
-    <div class="modal-body" id="modalBody"></div>
+    <span class="close-modal" onclick="closeModal()">×</span>
+    <img id="modalImage" src="" alt="Product" />
+    <h2 id="modalName"></h2>
+    <div class="modal-price">Rs. <span id="modalPrice"></span></div>
+    <p id="modalCategory"></p>
+    
+    <div class="colours-section">
+      <h4>ලබා ගත හැකි වර්ණ:</h4>
+      <div class="colour-chips-wrapper">
+        <div id="modalColours" class="colour-chips"></div>
+      </div>
+    </div>
+    
+    <div style="margin-top:25px; text-align:left;">
+      <h4 style="color:#ff69b4; margin-bottom:10px;">විස්තර:</h4>
+      <p id="modalDetails"></p>
+    </div>
+    
+    <button class="btn" style="margin-top:30px;" onclick="addToCartFromModal()">➕ කූඩයට එකතු කරන්න</button>
   </div>
 </div>
 
@@ -342,28 +478,76 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-// ඔයාගේ original script එකේ ඉහතින් තියෙන තැන් ඔක්කොම තියාගන්න
-// පහත කොටස් විතරක් update කරන්න / replace කරන්න
-
 emailjs.init("W_o_RiuSlVn_zCxlp");
 
 let products = [];
-fetch('https://script.google.com/macros/s/AKfycby0FNsa6h84fanuT5xgOD__MH8L69-ORZSXnJJjk1qmvYZ_SSnrRNgLQUjVQujfh8WN/exec')
-  .then(response => response.json())
+let currentProduct = null;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// Correct URL - ඔයාගේ පරණ working link එක
+fetch('https://script.google.com/macros/s/AKfycbz4Qdm79XmIE2hi1f2QpOXOklHKV_wCoEVrj9d84MIA6DH9fLVVIv49deGWgfSM6kzY/exec')
+  .then(response => {
+    if (!response.ok) throw new Error("Fetch failed: " + response.status);
+    return response.json();
+  })
   .then(data => {
     products = data;
     renderProducts();
   })
-  .catch(error => {
-    document.getElementById('productGrid').innerHTML = '<p style="text-align:center; color:#ff69b4; font-size:1.2rem;">Products load කරන්න බැරි වුණා 😢 Refresh කරලා බලන්න</p>';
+  .catch(err => {
+    console.error(err);
+    document.getElementById('productGrid').innerHTML = 
+      '<p style="text-align:center;color:#ff4444;font-size:1.3rem;">නිෂ්පාදන ලෝඩ් කරන්න බැරි වුණා 😢<br>Internet බලලා refresh කරන්න</p>';
   });
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+function saveCart() { localStorage.setItem("cart", JSON.stringify(cart)); }
 
-// ඔයාගේ original functions ඔක්කොම මෙතන තියෙනවා කියලා උපකල්පනය කරනවා
-// (saveCart, showToast, toggleCart, addToCart, removeFromCart, changeQty, updateCartCount, renderCart, placeOrder)
+function showToast(message, type = 'success') {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = `show ${type}`;
+  setTimeout(() => toast.className = toast.className.replace('show', ''), 2200);
+}
 
-// renderProducts function එක update කරන්න (card එකට onclick එක එකතු කරන්න)
+function toggleCart() {
+  document.getElementById("cartSidebar").classList.toggle("active");
+  renderCart();
+}
+
+function addToCart(productId) {
+  const item = cart.find(p => p.id === productId);
+  if (item) item.qty += 1;
+  else cart.push({ id: productId, qty: 1 });
+  saveCart();
+  renderCart();
+  updateCartCount();
+  showToast("කූඩයට එකතු වුණා ✓");
+}
+
+function removeFromCart(productId) {
+  cart = cart.filter(p => p.id !== productId);
+  saveCart();
+  renderCart();
+  updateCartCount();
+}
+
+function changeQty(productId, amount) {
+  const item = cart.find(p => p.id === productId);
+  if (!item) return;
+  item.qty += amount;
+  if (item.qty <= 0) removeFromCart(productId);
+  else {
+    saveCart();
+    renderCart();
+    updateCartCount();
+  }
+}
+
+function updateCartCount() {
+  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+  document.getElementById("cartCount").innerText = totalQty;
+}
+
 function renderProducts() {
   const grid = document.getElementById("productGrid");
   const search = document.getElementById("searchInput").value.toLowerCase();
@@ -371,73 +555,170 @@ function renderProducts() {
   grid.innerHTML = "";
 
   const filtered = products.filter(p => {
-    const matchSearch = p.name.toLowerCase().includes(search);
-    const matchCategory = category === "all" ? true : p.category === category;
+    const matchSearch = (p.name || "").toLowerCase().includes(search);
+    const matchCategory = category === "all" ? true : (p.category || "") === category;
     return matchSearch && matchCategory;
   });
 
   if (filtered.length === 0) {
-    grid.innerHTML = "<p style='text-align:center;opacity:0.7;font-size:1.2rem;color:#555;'>No products found</p>";
+    grid.innerHTML = "<p style='text-align:center;opacity:0.7;font-size:1.2rem;color:#555;'>කිසිවක් හමු නොවුණා 😔</p>";
     return;
   }
 
   filtered.forEach(p => {
     grid.innerHTML += `
-      <div class="card" onclick="showProductDetail(${p.id})">
-        <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/250?text=No+Image';">
-        <h3>${p.name}</h3>
-        <p>Category: ${p.category}</p>
-        <div class="price">Rs. ${p.price}</div>
-        <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">➕ Add to Cart</button>
+      <div class="card" onclick="showProductDetails(${p.id})">
+        <img src="${p.image || 'https://via.placeholder.com/250?text=No+Image'}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/250?text=No+Image';">
+        <h3>${p.name || 'නම නැත'}</h3>
+        <p>කාණ්ඩය: ${p.category || 'N/A'}</p>
+        <div class="price">Rs. ${p.price || 0}</div>
+        <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">➕ කූඩයට එකතු කරන්න</button>
       </div>
     `;
   });
 }
 
-// Modal functions
-function showProductDetail(id) {
-  const p = products.find(x => x.id === id);
-  if (!p) return;
+function showProductDetails(productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
 
-  document.getElementById("modalTitle").textContent = p.name;
+  currentProduct = product;
 
-  let colorsHtml = '';
-  if (p.colors && p.colors.trim()) {
-    const colors = p.colors.split(',').map(c => c.trim()).filter(Boolean);
-    colorsHtml = '<div class="swatches">';
-    colors.forEach(c => {
-      let bg = c.startsWith('#') ? c : '#cccccc';
-      colorsHtml += `<div class="swatch-container">
-        <div class="swatch" style="background:${bg};"></div>
-        <div class="swatch-label">${c}</div>
-      </div>`;
+  document.getElementById("modalImage").src = product.image || 'https://via.placeholder.com/400?text=No+Image';
+  document.getElementById("modalName").textContent = product.name || 'නම නැත';
+  document.getElementById("modalPrice").textContent = product.price || 0;
+  document.getElementById("modalCategory").textContent = "කාණ්ඩය: " + (product.category || "N/A");
+
+  const coloursDiv = document.getElementById("modalColours");
+  coloursDiv.innerHTML = "";
+  if (product.colours && product.colours.trim() !== "") {
+    const colourList = product.colours.split(",").map(c => c.trim());
+    colourList.forEach(colour => {
+      const chip = document.createElement("div");
+      chip.className = "colour-chip";
+      chip.textContent = colour;
+      coloursDiv.appendChild(chip);
     });
-    colorsHtml += '</div>';
+  } else {
+    coloursDiv.innerHTML = "<p style='color:#777;'>වර්ණ ලැයිස්තුවක් නැත</p>";
   }
 
-  document.getElementById("modalBody").innerHTML = `
-    <img src="${p.image}" alt="${p.name}"
-         onerror="this.src='https://via.placeholder.com/360x420/ffe4e1/333?text=No+Image';">
-    <h2 style="color:#ff4500; margin:15px 0 10px;">Rs. ${p.price}</h2>
-    <p><b>Category:</b> ${p.category}</p>
-    ${colorsHtml || '<p style="color:#777; margin:15px 0;">No colors available</p>'}
-    <p style="margin-top:20px; line-height:1.6;">${p.description || 'No description available.'}</p>
-    <button class="btn" style="margin-top:25px;" onclick="addToCart(${p.id})">➕ Add to Cart</button>
-  `;
+  document.getElementById("modalDetails").textContent = 
+    product.details || "වැඩි විස්තර තවමත් එකතු කර නොමැත.";
 
-  document.getElementById("productModal").classList.add("active");
+  document.getElementById("productModal").style.display = "block";
 }
 
 function closeModal() {
-  document.getElementById("productModal").classList.remove("active");
+  document.getElementById("productModal").style.display = "none";
+  currentProduct = null;
 }
 
-// Modal එක එළියට click කළොත් close වෙන්න
-document.getElementById("productModal").addEventListener("click", e => {
-  if (e.target === document.getElementById("productModal")) closeModal();
-});
+function addToCartFromModal() {
+  if (currentProduct) {
+    addToCart(currentProduct.id);
+    closeModal();
+    showToast("විස්තරෙන් කූඩයට එකතු වුණා ✓");
+  }
+}
 
-// ඔයාගේ original initial calls
+window.onclick = function(event) {
+  const modal = document.getElementById("productModal");
+  if (event.target === modal) closeModal();
+}
+
+function renderCart() {
+  const cartItemsBox = document.getElementById("cartItems");
+  const cartTotalBox = document.getElementById("cartTotal");
+  cartItemsBox.innerHTML = "";
+
+  if (cart.length === 0) {
+    cartItemsBox.innerHTML = "<p style='opacity:0.7;text-align:center;margin-top:20px;color:#555;'>කූඩය හිස් 🛒</p>";
+    cartTotalBox.innerText = "0";
+    return;
+  }
+
+  let total = 0;
+  cart.forEach(item => {
+    const product = products.find(p => p.id === item.id);
+    if (!product) return;
+    const subTotal = (product.price || 0) * item.qty;
+    total += subTotal;
+    cartItemsBox.innerHTML += `
+      <div class="cart-item">
+        <h4>${product.name || 'නම නැත'}</h4>
+        <p>Rs. ${product.price || 0} × ${item.qty} = <b>Rs. ${subTotal}</b></p>
+        <div class="cart-controls">
+          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">➖</button>
+          <button class="qty-btn" onclick="changeQty(${item.id}, 1)">➕</button>
+          <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑 ඉවත් කරන්න</button>
+        </div>
+      </div>
+    `;
+  });
+  cartTotalBox.innerText = total;
+}
+
+function placeOrder() {
+  if (cart.length === 0) return alert("කූඩය හිස්!");
+  
+  const name    = document.getElementById("customerName").value.trim();
+  const phone   = document.getElementById("customerPhone").value.trim();
+  const email   = document.getElementById("customerEmail").value.trim();
+  const address = document.getElementById("customerAddress").value.trim();
+
+  if (!name || !phone || !address) return alert("නම, දුරකථන අංකය සහ ලිපිනය අනිවාර්යයි!");
+
+  let orderText = "";
+  let total = 0;
+  cart.forEach(item => {
+    const product = products.find(p => p.id === item.id);
+    if (!product) return;
+    const sub = (product.price || 0) * item.qty;
+    total += sub;
+    orderText += `• ${product.name || 'නම නැත'} (Rs.${product.price || 0}) x ${item.qty} = Rs.${sub}\n`;
+  });
+
+  const templateParams = {
+    customer_name: name,
+    customer_phone: phone,
+    customer_email: email || "නොදක්වා ඇත",
+    customer_address: address,
+    order_items: orderText,
+    total_price: total
+  };
+
+  const orderBtn = document.querySelector(".order-btn");
+  const originalText = orderBtn.innerHTML;
+  orderBtn.innerHTML = "⏳ රැඳෙන්න...";
+  orderBtn.disabled = true;
+
+  emailjs.send("service_jole3ot", "template_n8pbmd8", templateParams)
+    .then(() => {
+      showToast("ඇණවුම යැව්වා! ස්තූතියි ♡", "success");
+      alert("✅ ඇණවුම සාර්ථකව යැව්වා!");
+      cart = [];
+      localStorage.removeItem("cart");
+      renderCart();
+      updateCartCount();
+      document.getElementById("customerName").value = "";
+      document.getElementById("customerPhone").value = "";
+      document.getElementById("customerEmail").value = "";
+      document.getElementById("customerAddress").value = "";
+    })
+    .catch(err => {
+      showToast("ඇණවුම යැවීම අසාර්ථකයි – බලන්න connection එක", "error");
+      console.error(err);
+    })
+    .finally(() => {
+      setTimeout(() => {
+        orderBtn.innerHTML = originalText;
+        orderBtn.disabled = false;
+      }, 1800);
+    });
+}
+
+// Initial load
 renderProducts();
 renderCart();
 updateCartCount();
